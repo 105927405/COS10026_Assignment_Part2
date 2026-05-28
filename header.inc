@@ -13,10 +13,10 @@
         <img src = "Images/Nav_Logo.png" alt = "Blade EduNET Logo">
         <h1> Blade EduNET </h1> <!--centre align h1-->
         <nav>
-            <a href = "index.html">Home Page</a>
-            <a href = "jobs.html">Available Positions</a>
-            <a href = "apply.html">Job Application</a>
-            <a href = "software.html">Our Software</a>
-            <a href = "about.html">About Us</a>
+            <a href = "index.php">Home Page</a>
+            <a href = "jobs.php">Available Positions</a>
+            <a href = "eoi.php">Job Application</a>
+            <a href = "software.php">Our Software</a>
+            <a href = "about.php">About Us</a>
         </nav>
     </header>
