@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<htmml lang="en">
+<html lang="en">
 
 <head>
     <meta charset = "utf-8"/>
@@ -13,9 +13,9 @@
 
 <body>
 
-<?php innclude 'header.inc'; ?>
+<?php include 'header.inc'; ?>
 
-<div class="BackgorundContainer">
+<div class="BackgroundContainer">
 
 <div class="TextContainer">
 
