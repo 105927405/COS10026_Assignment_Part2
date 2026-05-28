@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 26, 2026 at 04:30 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: May 28, 2026 at 03:07 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `BLADEEDUNET`
+-- Database: `bladeedunet`
 --
 
 -- --------------------------------------------------------
@@ -35,10 +35,10 @@ CREATE TABLE `about` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EOI`
+-- Table structure for table `eoi`
 --
 
-CREATE TABLE `EOI` (
+CREATE TABLE `eoi` (
   `EOI_ID` int(11) NOT NULL,
   `F_Name` varchar(40) NOT NULL,
   `L_Name` varchar(40) NOT NULL,
@@ -58,10 +58,10 @@ CREATE TABLE `EOI` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Jobs`
+-- Table structure for table `jobs`
 --
 
-CREATE TABLE `Jobs` (
+CREATE TABLE `jobs` (
   `REF_NUM` int(11) NOT NULL COMMENT 'Job Ref Number',
   `Job_Name` varchar(40) NOT NULL,
   `Pay` int(11) NOT NULL COMMENT 'Example Salary',
@@ -74,38 +74,45 @@ CREATE TABLE `Jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `User_ID` int(100) NOT NULL,
   `Username` varchar(20) NOT NULL,
-  `Password` int(255) NOT NULL COMMENT 'Encrypted by PHP',
+  `Password` varchar(255) NOT NULL COMMENT 'Encrypted by PHP',
   `F_Name` varchar(15) NOT NULL,
   `L_Name` varchar(15) NOT NULL,
-  `Role` enum('IT','HR','User') NOT NULL
+  `Role` enum('IT','HR','BLANK') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`User_ID`, `Username`, `Password`, `F_Name`, `L_Name`, `Role`) VALUES
+(2, 'bjws', '$2y$10$wtSDdS1mrVuQcNUhHFUge.BNeHAGoz5DW9AkiHIbIw5UpoiNyoeQ6', 'blake', 'stone', '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `EOI`
+-- Indexes for table `eoi`
 --
-ALTER TABLE `EOI`
+ALTER TABLE `eoi`
   ADD PRIMARY KEY (`EOI_ID`);
 
 --
--- Indexes for table `Jobs`
+-- Indexes for table `jobs`
 --
-ALTER TABLE `Jobs`
+ALTER TABLE `jobs`
   ADD PRIMARY KEY (`REF_NUM`);
 
 --
--- Indexes for table `Users`
+-- Indexes for table `users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`User_ID`);
 
 --
@@ -113,22 +120,22 @@ ALTER TABLE `Users`
 --
 
 --
--- AUTO_INCREMENT for table `EOI`
+-- AUTO_INCREMENT for table `eoi`
 --
-ALTER TABLE `EOI`
+ALTER TABLE `eoi`
   MODIFY `EOI_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Jobs`
+-- AUTO_INCREMENT for table `jobs`
 --
-ALTER TABLE `Jobs`
+ALTER TABLE `jobs`
   MODIFY `REF_NUM` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Job Ref Number';
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `Users`
-  MODIFY `User_ID` int(100) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `User_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
