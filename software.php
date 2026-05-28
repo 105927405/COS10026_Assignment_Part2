@@ -1,9 +1,9 @@
 <!--------------------------------------------------
 //                                                //
-//          Blade EduNET Software Page            //
+//          Blade EduNET Software Page PHP        //
 //          Author: Blake Stone                   //
 //          Student ID: 105927405                 //
-//          Date of creation: 18/4/2026           //
+//          Date of creation: 28/5/2026           //
 //          File Size: 6928 bytes                 //
 //                                                //
 --------------------------------------------------->
