@@ -1,0 +1,17 @@
+<footer> 
+        <h5>
+            Creating resources for learning and growing young minds.  <!--centre align footer-->
+            
+        </h5>
+            
+    
+        <!-- contact details (made up) include email, phone, location -->
+        <nav>
+            <a href = "mailto:info@education.blade-net.net">info@education.blade-net.net</a>
+            <a href = "https://www.youtube.com/watch?v=HWc3WY3fuZU">011189998819991197253</a>
+            <a href = "https://github.com/105927405/COS10026_Assignment">GitHub Repository</a>
+            <a href = "https://cos10026-bam.atlassian.net/jira/software/projects/SCRUM/boards/1">Jira Link</a>
+        </nav> 
+
+         <input type="text" placeholder="Search..">
+    </footer>
