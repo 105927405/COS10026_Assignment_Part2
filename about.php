@@ -24,9 +24,9 @@
       The core of <strong>Blade EduNET</strong> follows our motto <strong>"No education is the restriction of the mind"</strong> <br>
  </p>
 
-  <hr class = "hrSpecial">
+  <hr class ="hrSpecial">
 
-	<dl>
+	<section>
 	<h3>
 		About the Group
 	</h3>
@@ -36,7 +36,7 @@
     <div class = "PersonContainer">
 	<p>
 	Marcus's contribution has been making the Application page for this project also providing feedback and ideas for the design of the website. <br>
-  Marcuc's quote: "ymay ollarscay ueblay andyay ymay ecknay isyay edray" meaning "My collars blue and my neck is red" in Pig Latin.
+  Marcus's quote: "ymay ollarscay ueblay andyay ymay ecknay isyay edray" meaning "My collars blue and my neck is red" in Pig Latin.
   </p>
     </div>
 
@@ -55,11 +55,12 @@
 		</h4>
     <div class = "PersonContainer">
 	<p>
-	  Aaron's contribution to this project has been the making of the Jobs and About Us page along with providing feedback and ideas on what the website should look like and desgin ideas. <br>
+	  Aaron's contribution to this project has been the making of the Jobs and About Us page along with providing feedback and ideas on what the website should look like and design ideas. <br>
     Aaron's quote: "Memento Mori" meaning "Remember you will die" in Latin.
   </p>
     </div>
-  </dl>
+</section>
+
   <hr class = "hrSpecial">
 
 <h4>Fun Facts About Us</h4>
@@ -81,7 +82,7 @@
     <td>Swinburne Race Team</td>
     <td>Let Down by Radiohead</td>
     <td>Seven Stars Menthol and Hibiki</td>
-    <td>Went to Chisholm Tafe before University</td>
+    <td>Went to Chisholm TAFE before University</td>
   </tr>
 
  <tr>
@@ -106,9 +107,11 @@
 </table>
 
 
-<dl>
   <hr class = "hrSpecial">
+  <section>
+
 	<h4>Classes</h4>
+    <dl>
 		<dt><strong>Web Technology</strong></dt><dd>COS10026</dd><dd>Atie Kia</dd>
 	
   		<dt><strong>User Experience Design Project</strong></dt><dd>ICT20025</dd><dd>Dr Karola von Baggo</dd>
@@ -118,6 +121,8 @@
 		<dt><strong>Network Security and Resilience</strong></dt><dd>TNE30009</dd><dd>Peter Branch</dd>
 
 </dl>
+</section>
+
 <hr class = "hrSpecial">
 	<h3>Time Table</h3>
 <table>
@@ -136,6 +141,7 @@
     <td></td>
     <td></td>
     <td>TNE20002</td>
+</tr>
   <tr>
     <td>10:30 - 12:30</td>
     <td></td>
@@ -167,6 +173,7 @@
     <td></td>
     <td></td>
     <td>COS10026</td>
+</tr>
 </table>
 </div>
 </div>
