@@ -10,7 +10,7 @@
 <body>
     <div class = "BackgroundContainer">
     <header>
-        <img src = "Images/Nav_Logo.png" alt = "Blade EduNET Logo">
+        <img src = "Styles/Images/Nav_Logo.png" alt = "Blade EduNET Logo">
         <h1> Blade EduNET </h1> <!--centre align h1-->
         <nav>
             <a href = "index.php">Home Page</a>

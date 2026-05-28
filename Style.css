@@ -1,0 +1,547 @@
+/*//////////////////////////////////////////////////
+//                                                //
+//          Blade EduNET Site CSS                 //
+//          Author: Blake Stone                   //
+//          Student ID: 105927405                 //
+//          Date of creation: 11/4/2026           //
+//          File Size: 10233 bytes                //
+//                                                //
+//////////////////////////////////////////////////*/
+
+/* set default margins and paddings for entire site (fixes certain sizing and overall look) */
+* {
+
+    margin: 0;
+    padding: 0;
+
+}
+
+/* disables the visual scroll bar on side of screen thanks to the OG stack overflow*/
+::-webkit-scrollbar { 
+    display: none;
+}
+
+/* header colour, font size, margin settings */
+h2, h3, h5 {
+
+    color: #171080;
+
+}
+
+h3 {
+
+    font-size: 2em;
+    padding-bottom: 5px;
+    margin-top: 5px;
+
+}
+
+h4 {
+
+    font-size: 1.5em;
+    color: #171080;
+    margin-top: 20px;
+
+}
+
+
+h5 {
+
+    margin-bottom: 15px;
+    font-size: 1em;
+
+}
+
+/* header css for h1, images (logo) and nav bar, as well as nav hover */
+header {
+
+    position: sticky; 
+    margin: auto;  /* space around sides auto for different screen sizes*/
+    top: 15px; /* push just header down from top of page only visual change not physical container moving so doesn't break other thingss*/
+    width: fit-content;  /* shrink to content size only*/
+    max-width: 90%; /* set max width of header nav bar to keep effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #171080;
+    padding: 20px 40px;
+    border-radius: 50px; 
+    box-shadow: 0 4px 15px #1e1e1e 
+
+}
+
+header h1 {
+
+    color: #ffffff;
+    font-size: 3em;
+
+}
+
+header img {
+
+    height: 100px;
+    width: auto;
+    margin-right: 20px; /* move logo away from text */
+ 
+}
+
+nav {
+
+    position: static;
+    margin: 0 0 0px 100px; /* move nav buttons up a bit and over from title */
+    
+}
+
+nav a {
+
+    display: inline-block;
+    background-color: #333;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s; /* fade animation for hovering over button */
+
+}
+
+nav a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+/* footer settings */
+footer {
+
+    position: relative; /* keeps footer to bottom of page */
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #171080;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+/* set slogan/little text on header sizing and margins */
+footer h5 {
+
+    color: #ffffff;
+    font-size: 1em;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+footer nav {
+
+    position: static;
+    margin-top: 8px;
+    
+}
+
+footer nav a {
+
+    display: inline-block;
+    background-color: #333;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s; /* fade animation for hovering over button */
+    
+
+}
+
+footer nav a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+/* search bar css stuffs */
+footer input[type=text] {
+
+    margin: 2px 50px 0 30px;
+    padding: 20px;
+    width: 20%;
+
+}
+
+
+
+/* main body css, font, background colour and setting line height for text */
+body {
+
+    font-family: 'Segoe UI', sans-serif; /* whole site text font */
+    background-color: #ffffff;
+    line-height: 1.6;
+    
+}
+
+
+.BackgroundContainer {
+
+    background-image: url("Styles/Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
+    background-size: cover;
+    background-position: center;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+.WelcomeContainer {
+
+    display: block;
+    width: fit-content;
+    margin: 60px auto 0px auto; /* center box  on the left and right and push down*/
+    background-color: #ffffff;
+    padding: 60px 20px;
+    border-radius: 10px;
+    text-align: center;
+    animation: ColourWave 20s infinite; /*controlling text color with keyframes */
+
+}
+
+.WelcomeContainer h3, .SoonContainer h3 {
+
+    animation: ColourWave 20s infinite; /*controlling text color with keyframes and overwrites global h3 settings for color */
+    font-size: 2.5em;
+    margin-bottom: 10px;
+
+}
+
+/* colour gradient animation colors/settings stuffs */
+@keyframes ColourWave {
+    0% {color: red;}
+
+    20% {color: orange;}
+
+    40% {color: green;}
+
+    60% {color: cyan;}
+
+    80% {color: blue;}
+
+    90% {color: violet;}
+
+    100% {color: purple;}
+
+}
+
+/* main text container css, used for most text */
+.TextContainer {
+
+    margin: 60px auto 60px auto;
+    width: 900px;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+/* container for the about us each individual abous us section alginment*/
+.PersonContainer {
+
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+
+}
+
+/* strong tag settings */
+strong {
+
+    color: #171080;
+
+}
+
+/* default horizontal line settings */
+hr {
+
+    border: 2px solid #171080;
+
+}
+
+/* special horizontal line, used for when i wanted one that was margined downwards a little for styling purposess*/
+.hrSpecial {
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+
+ul {
+
+    margin: 7px;
+
+}
+
+li {
+
+    margin-left: 10px;
+
+}
+
+
+/* table settings */
+table {
+
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 20px 0 0;
+    font-size: 1em;
+    text-align: center;
+    background-color: #f9f9f9;
+    
+}
+
+
+table th {
+
+    background-color: #444;
+    color: #171080;
+    padding: 12px;
+    font-size: 1.1em;
+
+}
+  
+
+table td {
+
+    padding: 10px;
+    border: 1px solid #ddd;
+
+}
+
+/* Job position text container css */
+.JobContainer {
+
+    margin: 40px auto 30px auto;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+.JobContainer h2 {
+
+    margin-top: 0;
+
+}
+
+.JobContainer h5 {
+
+    color: #ff4c4c;
+
+}
+
+.JobContainer ol {
+
+    margin: 10px;
+
+}
+
+.JobContainer li {
+
+    margin-left: 12px;
+
+}
+
+/* default aside settings */
+aside {
+
+    width: 250px;
+    float: right;
+    padding: 10px;
+    margin: 0 0 20px 20px;
+    
+}
+
+aside ul {
+    
+    margin: 7px;
+
+}
+
+/* aside buttons used for job applications */
+aside a {
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+aside a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+/* default fieldset settings for job applications */
+fieldset {
+
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+/* settings input, select and text area design */
+fieldset input, select, textarea {
+
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0 20px;
+    border: 0.5px solid #171080;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+
+/* custom css container for job application time slot availability */
+.AvailabilityContainer input {
+    
+    width: 20%;
+
+}
+
+/* custom checkboxes for time slot stuffs */
+.AvailabilityContainer input[type = "checkbox"] {
+
+    accent-color: cyan;
+    width: 18px;
+    height: 18px;
+    margin-right: 60px;
+    margin-left: 40px;
+
+}
+
+.AvailabilityContainer label {
+
+    display: inline-block;
+    margin: 2px;
+    width: 100px;
+
+}
+
+/* this thing in order to move the till label acoss to the middle */
+.AvailabilityContainer .till {
+
+    margin-left: 80px;
+
+}
+
+/* custom made upload button for files cause the other one is ugly */
+.UploadButton {
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+  
+.UploadButton:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+  
+.UploadButton input[type = "file"] {
+
+    display: none; /* remove normal html upload box to replace with new upload button made above */
+
+}
+
+/* submit button css for job appkication page */
+button{
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    border: none; /* removes ugly border lol */
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+    
+}
+
+button:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+/* align submit button to center of application page */
+.SubmitButtonContainer {
+
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+/* skills container aka bane of my excistance i don't know why i needed this, but apparently i did so here we are */
+.SkillsContainer input[type = "checkbox"] {
+
+    accent-color: cyan;
+    width: 18px;
+    height: 18px;
+    margin-right: 60px;
+    
+}
+  
+.SkillsContainer label {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 16px;
+    
+}
+
+.SoonContainer {
+
+    display: block;
+    width: fit-content;
+    margin: 60px auto 749px auto; /* center box  on the left and right and push down also stretching background so no whitespace on site page*/
+    background-color: #ffffff;
+    padding: 60px 20px;
+    border-radius: 10px;
+    text-align: center;
+    animation: ColourWave 20s infinite; /*controlling text color with keyframes */
+
+}
