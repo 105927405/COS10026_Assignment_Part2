@@ -185,7 +185,7 @@ body {
 
 .BackgroundContainer {
 
-    background-image: url("Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
+    background-image: url("Styles/Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
     background-size: cover;
     background-position: center;
     min-height: 900px;
