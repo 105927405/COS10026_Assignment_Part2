@@ -1,15 +1,14 @@
-about test
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset = "utf-8"/>
-    <meta name = "description" content = "Blade EduNET Comapny Website"/>
-    <meta name = "keywords" content = "job application, education, work, development"/>
-    <meta name = "author" content = "Blake, Marcus, Aaron"/>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Blade EduNET Comapny Website"/>
+    <meta name="keywords" content="job application, education, work, development"/>
+    <meta name="author" content="Blake, Marcus, Aaron"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Blade EduNET </title>
-    <link href = "Styles/Style.css" rel = "stylesheet"/>
+    <title>Blade EduNET</title>
+    <link href="Styles/Style.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -25,47 +24,39 @@ about test
       The core of <strong>Blade EduNET</strong> follows our motto <strong>"No education is the restriction of the mind"</strong> <br>
  </p>
 
-  <hr class ="hrSpecial">
+    <hr class="hrSpecial">
 </article>
 </div>
 
-	<h3>
-		About the Group
-	</h3>
+<h3>About the Group</h3>
 
 <?php 
-
 require_once 'settings.php';
 
 $sql = "SELECT * FROM about";
-
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-
-  while ($row = $result->fetch_assoc()) {
-
-    ?>
-
-    <div class = "PersonContainer">
-      <section>
-	<h4><?php echo $row['Name']; ?></h4>
-	<p>
-    <?php echo $row['Contributions']; ?>
-  </p>
-  </section>
-    </div>
-
-<?php
-  }
-}
-$conn->close();
-
+    while ($row = $result->fetch_assoc()) {
 ?>
 
-  <hr class = "hrSpecial">
+<div class="PersonContainer">
+    <section>
+        <h4><?php echo $row['Name']; ?></h4>
+        <p><?php echo $row['Contributions']; ?></p>
+    </section>
+</div>
+
+<?php
+    }
+}
+$conn->close();
+?>
+
+<hr class="hrSpecial">
 
 <h4>Fun Facts About Us</h4>
+
 <table>
   <tr>
     <th>Name</th>
@@ -76,7 +67,7 @@ $conn->close();
     <th>Favourite Food</th>
     <th>Other Fun Facts</th>
   </tr>
-  
+
   <tr>
     <td>Aaron</td>
     <td>24</td>
@@ -87,29 +78,28 @@ $conn->close();
     <td>Went to Chisholm TAFE before University</td>
   </tr>
 
- <tr>
+  <tr>
     <td>Marcus</td>
     <td>24</td>
     <td>Gaming, Anime, Reading</td>
     <td>Swinburne Rover Team</td>
-    <td>Outlaws Get No Entry by Takuiwasaki</td>
+    <td>Outlaws Get No Entry</td>
     <td>Burgers</td>
     <td>Spent 7 years in St John's</td>
   </tr>
 
-   <tr>
+  <tr>
     <td>Blake</td>
     <td>19</td>
     <td>Gaming, Networking, Music</td>
     <td>Swinburne Rover Team</td>
-    <td>We are never getting back together by Taylor Swift</td>
+    <td>Taylor Swift</td>
     <td>Pasta & Mango</td>
-    <td>Built a Server farm at the age of 15</td>
+    <td>Built a Server farm at 15</td>
   </tr>
 </table>
 
-
-  <hr class = "hrSpecial">
+ <hr class = "hrSpecial">
   <section>
 
 	<h4>Classes</h4>
@@ -125,9 +115,11 @@ $conn->close();
 </dl>
 </section>
 
-<hr class = "hrSpecial">
-	<h3>Time Table</h3>
-<table>
+<hr class="hrSpecial">
+
+<h3>Time Table</h3>
+
+<table class="timetable">
   <tr>
     <th>Time</th>
     <th>Monday</th>
@@ -136,6 +128,7 @@ $conn->close();
     <th>Thursday</th>
     <th>Friday</th>
   </tr>
+
   <tr>
     <td>8:30 - 10:30</td>
     <td>ICT20025</td>
@@ -143,7 +136,8 @@ $conn->close();
     <td></td>
     <td></td>
     <td>TNE20002</td>
-</tr>
+  </tr>
+
   <tr>
     <td>10:30 - 12:30</td>
     <td></td>
@@ -152,6 +146,7 @@ $conn->close();
     <td></td>
     <td>TNE20002</td>
   </tr>
+
   <tr>
     <td>12:30 - 14:30</td>
     <td>TNE30009</td>
@@ -160,14 +155,16 @@ $conn->close();
     <td></td>
     <td></td>
   </tr>
-	<tr>
+
+  <tr>
     <td>13:30 - 15:30</td>
     <td>TNE20002</td>
-	<td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
+
   <tr>
     <td>14:30 - 16:30</td>
     <td></td>
@@ -175,12 +172,12 @@ $conn->close();
     <td></td>
     <td></td>
     <td>COS10026</td>
-</tr>
+  </tr>
 </table>
-</div>
+
 </div>
 
 <?php include 'footer.inc'; ?>
 
 </body>
-</html>about test
+</html>
