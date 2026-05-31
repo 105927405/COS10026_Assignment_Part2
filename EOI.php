@@ -1,25 +1,7 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
-    <meta charset = "utf-8"/>
-    <meta name = "description" content = "Blade EduNET Comapny Website"/>
-    <meta name = "keywords" content = "job application, education, work, development"/>
-    <meta name = "author" content = "Blake, Marcus, Aaron"/>
-    <title> Blade EduNET </title>
-    <link href = "Styles/Style.css" rel = "stylesheet"/>
-</head>
-<body>
-    <header>
-        <img src = "Images/Nav_Logo.png" alt = "Blade EduNET Logo">
-        <h1> Blade EduNET </h1> <!--centre align h1-->
-        <nav>
-            <a href = "index.html">Home Page</a>
-            <a href = "jobs.html">Available Positions</a>
-            <a href = "apply.html">Job Application</a>
-            <a href = "software.html">Our Software</a>
-            <a href = "about.html">About Us</a>
-        </nav>
-    </header>
+<?php include 'header.inc'; ?>
+    
 
  
 
@@ -145,6 +127,8 @@
     
 </fieldset>
 
+
+<!-- infomation on applicants home address-->
 <fieldset>
     <p>
         <label for="address">Address</label>
@@ -171,6 +155,7 @@
     </p>
 </fieldset>
 
+<!-- applicant selects from preselected skills-->
 <fieldset>
     <p>
         Please select the skills you have.
@@ -253,29 +238,9 @@
 
 <button type="submit" name="submit">Apply Now</button>
 <button type="reset" name="reset">Reset form</button>
-
-
-
 </form>
 
 
-<footer> 
-        <h5>
-            Creating resources for learning and growing young minds.  <!--centre align footer-->
-            
-        </h5>
-            
-    
-        <!-- contact details (made up) include email, phone, location -->
-        <nav>
-            <a href = "mailto:info@education.blade-net.net">info@education.blade-net.net</a>
-            <a href = "https://www.youtube.com/watch?v=HWc3WY3fuZU">011189998819991197253</a>
-            <a href = "https://github.com/105927405/COS10026_Assignment">GitHub Repository</a>
-            <a href = "https://cos10026-bam.atlassian.net/jira/software/projects/SCRUM/boards/1">Jira Link</a>
-        </nav> 
-
-         <input type="text" placeholder="Search..">
-    </footer>
-
+<?php include 'footer.inc'; ?>
 </body>
 </html>
