@@ -27,33 +27,25 @@ if (!isset($_SESSION["isloggedon"]) || $_SESSION["isloggedon"] !== true || $_SES
         die("Database connection failed: " . $conn->connect_error);
     }
     
-function GetTableName() {
-    return 'EOI';
-}
 
-function GetIdColumnName() {
-    return 'EOI_ID';
-}
-
-$table = GetTableName();
-$id_col = GetIdColumnName($table);
-$sql_table = $conn->real_escape_string($table);
+$EOItable = 'EOI';
+$EOIid_col = 'EOI_id';
 $searchEOI = isset($_GET['searchEOI']) ? $_GET['searchEOI'] : '';
 $searchEOI_safe = $conn->real_escape_string($searchEOI);
 
-if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $delete_id = intval($_GET['delete']);
-    $stmt = $conn->prepare("DELETE FROM $sql_table WHERE $id_col = ?");
+if (isset($_GET['EOIdelete']) && is_numeric($_GET['EOIdelete'])) {
+    $delete_id = intval($_GET['EOIdelete']);
+    $stmt = $conn->prepare("DELETE FROM $EOItable WHERE $EOIid_col = ?");
     $stmt->bind_param("i", $delete_id);
     $stmt->execute();
     $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfull from $table."));
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfull from $EOItable."));
     exit();
 }
 
-if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])){
-    $toggle_id = intval($_GET['toggle']);
-    $stmt = $conn->prepare("SELECT status FROM $table WHERE $id_col = ?");
+if (isset($_GET['EOItoggle']) && is_numeric($_GET['EOItoggle'])){
+    $toggle_id = intval($_GET['EOItoggle']);
+    $stmt = $conn->prepare("SELECT status FROM $EOItable WHERE $EOIid_col = ?");
     $stmt->bind_param("i", $toggle_id);
     $stmt->execute();
     $stmt->bind_result($current_status);
@@ -61,12 +53,12 @@ if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])){
     $stmt->close();
 
     $new_status = ($current_status === 'Accepted') ? 'Rejected' : 'Accepted';
-    $stmt = $conn->prepare("UPDATE $sql_table SET status = ? WHERE $id_col = ?");
+    $stmt = $conn->prepare("UPDATE $EOItable SET status = ? WHERE $EOIid_col = ?");
     $stmt->bind_param("si", $new_status, $toggle_id);
     $stmt->execute();
     $stmt->close();
 
-    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("Status updated to $new_status in $table."));
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("Status updated to $new_status in $EOItable."));
     exit();
 }
 ?>
@@ -74,15 +66,22 @@ if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])){
 <!DOCTYPE html> 
 <html lang = "en">
 <?php include 'header.inc'; ?>
-<div class = "ManageContainer">
 <body>
+<div class = "ManageContainer">
+
     
     <h2>Welcome to the HR Manager Dashboard, <?= $_SESSION['firstname'] ?> <?= $_SESSION['lastname'] ?></h2> 
     <a href = "Logout.php">Logout</a>
 
+ <?php
+if (isset($_GET['message'])) {
+    echo '<div style="color: green; font-weight: bold;">' . $_GET['message'] . '</div>';
+}
+?>
+
 
     <form method = "GET" action= "">
-    <input type = "text" name = "searchEOI" placeholder = "Search EOI Database" value = "<?= $searchEOI ?>">
+    <input type = "text" name = "searchEOI" placeholder = "Search EOI Database" value = "<?= htmlspecialchars($searchEOI) ?>">   <!--htmlspecialchars uses as a security feature-->
     <button type = "submit" value = "Search">Search</button>
 </form>
 <hr class = "hrSpecial">
@@ -105,7 +104,7 @@ if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])){
 <?php
     $EOIquery = ($searchEOI) ?
     "SELECT EOI_id, first_name, last_name, dob, email, phone, job, cl_upload, res_upload, status 
-    FROM Application
+    FROM EOI
     WHERE EOI_id LIKE '%$searchEOI_safe%'
     OR first_name LIKE '%$searchEOI_safe%'
     OR last_name LIKE '%$searchEOI_safe%'
@@ -115,13 +114,13 @@ if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])){
     OR cl_upload LIKE '%$searchEOI_safe%'
     OR res_upload LIKE '%$searchEOI_safe%'
     OR status LIKE '%$searchEOI_safe%'"
-    : "SELECT applicant_id, first_name, last_name, dob, email, phone, job, cl_upload, res_upload, status FROM Application";
+    : "SELECT EOI_id, first_name, last_name, dob, email, phone, job, cl_upload, res_upload, status FROM EOI";
 
 $EOIresults = mysqli_query($conn, $EOIquery);
 if (!$EOIresults) {
     die("Query failed: ".mysqli_error($conn));
 }
-    if(mysqli_num_rows($results) > 0) {
+    if(mysqli_num_rows($EOIresults) > 0) {
     while ($row = mysqli_fetch_assoc($EOIresults)) {
         echo "<tr>
                 <td>" . $row['EOI_id'] . "</td>
@@ -134,19 +133,16 @@ if (!$EOIresults) {
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=cl'>Download</a></td>
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=res'>Download</a></td>
                 <td>" . $row['status'] . "</td>
-                <td><a href='?toggle=" . $row['EOI_id'] . "&table=Application' onclick=\"return confirm('Change status of applicant ID {$row['EOI_id']}?');\">Toggle</a></td>
-                <td><a href='?delete=" . $row['EOI_id'] . "&table=Application' onclick=\"return confirm('Are you sure you want to delete applicant ID {$row['EOI_id']}?');\">Delete</a></td>
+                <td><a href='?EOItoggle=" . $row['EOI_id'] . "' onclick=\"return confirm('Change status of applicant ID {$row['EOI_id']}?');\">Toggle</a></td>
+                <td><a href='?EOIdelete=" . $row['EOI_id'] . "' onclick=\"return confirm('Are you sure you want to delete applicant ID {$row['EOI_id']}?');\">Delete</a></td>
                 </tr>"; 
     }
 } else {
     echo "<tr><td colspan='12'> No results found.</td></tr>";
 }
-?>
-
-
-
-
 mysqli_close($conn);
+?>
+</div>
 <?php include 'footer.inc'; ?>
 </body>
 </html>
