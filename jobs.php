@@ -30,6 +30,11 @@
 <?php
 require_once 'settings.php';
 
+$conn = new mysqli($host, $user, $password, $database);
+    if ($conn->connect_error) {
+        die("Database connection failed: " . $conn->connect_error);
+    }
+
 $search = "";
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {
@@ -91,6 +96,9 @@ if ($result && $result->num_rows > 0) {
 
         <h5>Preferable Skills:</h5>
         <p><?php echo $row['P_Skills']; ?></p>
+
+        <h5>Manager of Position:</h5>
+        <p><?php echo $row['Manager']; ?></p>
 
     </section>
 </div>
