@@ -64,22 +64,23 @@ header {
     justify-content: center;
     align-items: center;
     background-color: #171080;
-    padding: 20px 40px;
     border-radius: 50px; 
-    box-shadow: 0 4px 15px #1e1e1e 
+    box-shadow: 0 4px 15px #1e1e1e;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
 
 }
 
 header h1 {
 
     color: #ffffff;
-    font-size: 3em;
+    font-size: clamp(1.5rem, 4vw, 3rem);
 
 }
 
 header img {
 
-    height: 100px;
+    height: clamp(50px, 8vw, 100px);
     width: auto;
     margin-right: 20px; /* move logo away from text */
  
@@ -88,7 +89,10 @@ header img {
 nav {
 
     position: static;
-    margin: 0 0 0px 100px; /* move nav buttons up a bit and over from title */
+    margin-left: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     
 }
 
@@ -167,7 +171,7 @@ footer input[type=text] {
 
     margin: 2px 50px 0 30px;
     padding: 20px;
-    width: 20%;
+    width: min(300px, 80vw);
 
 }
 
@@ -188,7 +192,7 @@ body {
     background-image: url("Styles/Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
     background-size: cover;
     background-position: center;
-    min-height: 900px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 
@@ -238,7 +242,7 @@ body {
 .TextContainer {
 
     margin: 60px auto 60px auto;
-    width: 900px;
+    width: 90%;
     max-width: 900px;
     padding: 20px;
     background-color: #ffffff;
@@ -251,6 +255,7 @@ body {
 .PersonContainer {
 
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     margin-bottom: 20px;
     gap: 20px;
@@ -302,6 +307,8 @@ table {
     font-size: 1em;
     text-align: center;
     background-color: #f9f9f9;
+    display: block;
+    overflow-x: auto;
     
 }
 
@@ -326,6 +333,7 @@ table td {
 /* Job position text container css */
 .JobContainer {
 
+    width: 90%;
     margin: 40px auto 30px auto;
     max-width: 900px;
     padding: 20px;
@@ -399,6 +407,7 @@ aside a:hover {
 /* default fieldset settings for job applications */
 fieldset {
 
+    width: 90%;
     max-width: 900px;
     margin: 30px auto;
     padding: 20px;
@@ -537,11 +546,43 @@ button:hover {
 
     display: block;
     width: fit-content;
-    margin: 60px auto 749px auto; /* center box  on the left and right and push down also stretching background so no whitespace on site page*/
+    margin: 60px auto;
+    min-height: 60vh;
     background-color: #ffffff;
     padding: 60px 20px;
     border-radius: 10px;
     text-align: center;
     animation: ColourWave 20s infinite; /*controlling text color with keyframes */
+
+}
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        margin: 20px 0 0 0;
+        justify-content: center;
+    }
+
+    .TextContainer,
+    .JobContainer,
+    fieldset {
+        width: 95%;
+    }
+
+    aside {
+        float: none;
+        width: auto;
+        margin: 20px 0;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
 
 }
