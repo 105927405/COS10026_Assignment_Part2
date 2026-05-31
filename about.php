@@ -33,6 +33,11 @@
 <?php 
 require_once 'settings.php';
 
+$conn = new mysqli($host, $user, $password, $database);
+    if ($conn->connect_error) {
+        die("Database connection failed: " . $conn->connect_error);
+    }
+
 $sql = "SELECT * FROM about";
 $result = $conn->query($sql);
 
