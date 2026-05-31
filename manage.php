@@ -32,6 +32,8 @@ $EOItable = 'EOI';
 $EOIid_col = 'EOI_id';
 $JOBtable = 'Jobs';
 $JOBid_col = 'REF_NUM';
+$USERtable = 'Users';
+$USERid_col = 'User_ID';
 $searchEOI = isset($_GET['searchEOI']) ? $_GET['searchEOI'] : '';
 $searchEOI_safe = $conn->real_escape_string($searchEOI);
 
@@ -190,6 +192,56 @@ if (!$JOBresults) {
 }
     if(mysqli_num_rows($JOBresults) > 0) {
     while ($row = mysqli_fetch_assoc($JOBresults)) {
+        echo "<tr>
+                <td>" . $row['REF_NUM'] . "</td>
+                <td>" . $row['Job_Name'] . "</td>
+                <td>" . $row['Pay'] . "</td>
+                <td>" . $row['E_Skills'] . "</td>
+                <td>" . $row['P_Skills'] . "</td>
+                <td>" . $row['Description'] . "</td>
+                <td><a href='?JOBdelete=" . $row['REF_NUM'] . "' onclick=\"return confirm('Are you sure you want to delete Job ID {$row['REF_NUM']}?');\">Delete</a></td>
+                </tr>"; 
+    }
+} else {
+    echo "<tr><td colspan='12'> No results found.</td></tr>";
+}
+?>
+
+    <form method = "GET" action= "">
+    <input type = "text" name = "searchUSER" placeholder = "Search USER Database" value = "<?= htmlspecialchars($searchUSER) ?>">   <!--htmlspecialchars uses as a security feature-->
+    <button type = "submit" value = "Search">Search</button>
+</form>
+<hr class = "hrSpecial">
+<h3> Users (User Table) </h3>
+<table>
+    <tr>
+        <th> Job REF </th>
+        <th> Job Name </th>
+        <th> Pay </th>
+        <th> DOB </th>
+        <th> E-Skills </th>
+        <th> P-Skills </th>
+        <th> Description</th>
+    </tr>
+<?php
+    $USERquery = ($searchUSER) ?
+    "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description 
+    FROM Users
+    WHERE REF_NUM LIKE '%$searchUSER_safe%'
+    OR Job_Name LIKE '%$searchUSER_safe%'
+    OR Pay LIKE '%$searchUSER_safe%'
+    OR E_Skills LIKE '%$searchUSER_safe%'
+    OR P_Skills LIKE '%$searchUSER_safe%'
+    OR Description LIKE '%$searchUSER_safe%'"
+    : "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description FROM Users"; //show all results when search is empty
+
+
+$USERresults = mysqli_query($conn, $USERquery);
+if (!$USERresults) {
+    die("Query failed: ".mysqli_error($conn));
+}
+    if(mysqli_num_rows($USERresults) > 0) {
+    while ($row = mysqli_fetch_assoc($USERresults)) {
         echo "<tr>
                 <td>" . $row['REF_NUM'] . "</td>
                 <td>" . $row['Job_Name'] . "</td>
