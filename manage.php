@@ -4,7 +4,7 @@
     //            Admin Manage System                       //
     //            Author: Blake Stone                       //
     //            Date Of Creation: 29/5/2026               //
-    //            File Size: 5,571 Bytes                    //
+    //            File Size: 8,009 Bytes                    //
     //                                                      //
     //////////////////////////////////////////////////////////
 
@@ -30,6 +30,8 @@ if (!isset($_SESSION["isloggedon"]) || $_SESSION["isloggedon"] !== true || $_SES
 
 $EOItable = 'EOI';
 $EOIid_col = 'EOI_id';
+$JOBtable = 'Jobs';
+$JOBid_col = 'REF_NUM';
 $searchEOI = isset($_GET['searchEOI']) ? $_GET['searchEOI'] : '';
 $searchEOI_safe = $conn->real_escape_string($searchEOI);
 
@@ -39,7 +41,17 @@ if (isset($_GET['EOIdelete']) && is_numeric($_GET['EOIdelete'])) {
     $stmt->bind_param("i", $delete_id);
     $stmt->execute();
     $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfull from $EOItable."));
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfully from $EOItable."));
+    exit();
+}
+
+if (isset($_GET['JOBdelete']) && is_numeric($_GET['JOBdelete'])) {
+    $delete_id = intval($_GET['JOBdelete']);
+    $stmt = $conn->prepare("DELETE FROM $EOItable WHERE $EOIid_col = ?");
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfully from $JOBtable."));
     exit();
 }
 
@@ -114,7 +126,7 @@ if (isset($_GET['message'])) {
     OR cl_upload LIKE '%$searchEOI_safe%'
     OR res_upload LIKE '%$searchEOI_safe%'
     OR status LIKE '%$searchEOI_safe%'"
-    : "SELECT EOI_id, first_name, last_name, dob, email, phone, job, cl_upload, res_upload, status FROM EOI";
+    : "SELECT EOI_id, first_name, last_name, dob, email, phone, job, cl_upload, res_upload, status FROM EOI"; //show all results when search is empty
 
 $EOIresults = mysqli_query($conn, $EOIquery);
 if (!$EOIresults) {
@@ -140,8 +152,60 @@ if (!$EOIresults) {
 } else {
     echo "<tr><td colspan='12'> No results found.</td></tr>";
 }
+?>
+
+
+    <form method = "GET" action= "">
+    <input type = "text" name = "searchJOB" placeholder = "Search JOBs Database" value = "<?= htmlspecialchars($searchJOB) ?>">   <!--htmlspecialchars uses as a security feature-->
+    <button type = "submit" value = "Search">Search</button>
+</form>
+<hr class = "hrSpecial">
+<h3> Jobs (Jobs Table) </h3>
+<table>
+    <tr>
+        <th> Job REF </th>
+        <th> Job Name </th>
+        <th> Pay </th>
+        <th> DOB </th>
+        <th> E-Skills </th>
+        <th> P-Skills </th>
+        <th> Description</th>
+    </tr>
+<?php
+    $JOBquery = ($searchJOB) ?
+    "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description 
+    FROM Jobs
+    WHERE REF_NUM LIKE '%$searchJOB_safe%'
+    OR Job_Name LIKE '%$searchJOB_safe%'
+    OR Pay LIKE '%$searchJOB_safe%'
+    OR E_Skills LIKE '%$searchJOB_safe%'
+    OR P_Skills LIKE '%$searchJOB_safe%'
+    OR Description LIKE '%$searchJOB_safe%'"
+    : "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description FROM Jobs"; //show all results when search is empty
+
+
+$JOBresults = mysqli_query($conn, $JOBquery);
+if (!$JOBresults) {
+    die("Query failed: ".mysqli_error($conn));
+}
+    if(mysqli_num_rows($JOBresults) > 0) {
+    while ($row = mysqli_fetch_assoc($JOBresults)) {
+        echo "<tr>
+                <td>" . $row['REF_NUM'] . "</td>
+                <td>" . $row['Job_Name'] . "</td>
+                <td>" . $row['Pay'] . "</td>
+                <td>" . $row['E_Skills'] . "</td>
+                <td>" . $row['P_Skills'] . "</td>
+                <td>" . $row['Description'] . "</td>
+                <td><a href='?JOBdelete=" . $row['REF_NUM'] . "' onclick=\"return confirm('Are you sure you want to delete Job ID {$row['REF_NUM']}?');\">Delete</a></td>
+                </tr>"; 
+    }
+} else {
+    echo "<tr><td colspan='12'> No results found.</td></tr>";
+}
 mysqli_close($conn);
 ?>
+
 </div>
 <?php include 'footer.inc'; ?>
 </body>
