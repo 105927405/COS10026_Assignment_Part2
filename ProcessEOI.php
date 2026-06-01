@@ -132,7 +132,7 @@ function to_null_if_empty($value)
         }
 
         //bind parameters
-        $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiissss",
+        $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiisbsb",
         $F_name, $L_name, $DOB, $Email, $Phone_NUM, $Gender, $Job, 
         $monday, $montimein, $montimeout, $tuesday, $tuetimein, $tuetimeout, 
         $wednesday, $wedtimein, $wedtimeout, $thursday, $thurtimein, $thurtimeout, 
