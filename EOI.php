@@ -42,7 +42,7 @@
     <p>
         <label for="phone">Phone No.</label>
         <input type="tel" name="phone" id="phone" 
-        placeholder="Enter Phone Number" maxlength="11" required/>
+        placeholder="Enter Phone Number" pattern="[0-9]{10}" maxlength="10" required/>
     </p>
 </fieldset>
 
@@ -208,7 +208,7 @@
         </select>
 
         <label for="pstcode">Post Code</label>
-        <input type="text" name="pstcode" id="pstcode" placeholder="PostCode" maxlength="4" required/>
+        <input type="text" name="pstcode" id="pstcode" placeholder="PostCode" pattern="[0-9]{4}" maxlength="4" required/>
     </p>
 </fieldset>
 
