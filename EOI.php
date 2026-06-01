@@ -192,15 +192,15 @@
 <!-- infomation on applicants home address-->
 <fieldset>
     <p>
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address" placeholder="Street address" maxlength="40" required/>
+        <label for="Address">Address</label>
+        <input type="text" name="Address" id="Address" placeholder="Street address" maxlength="40" required/>
             <br>
-        <label for="suburbtown">Suburb/Town</label>
-        <input type="text" name="suburbtown" id="suburbtown" placeholder="suburb/town" maxlength="40" required/>
+        <label for="Suburb">Suburb/Town</label>
+        <input type="text" name="Suburb" id="Suburb" placeholder="suburb/town" maxlength="40" required/>
 
-        <label for="state">State</label>
-        <select name="state" id="state" required>
-            <option value="" disabled selected>Please select your state</option>
+        <label for="State">State</label>
+        <select name="State" id="State" required>
+            <option value="" disabled selected>Please select your State</option>
             <option value="1">VIC</option>
             <option value="2">NSW</option>
             <option value="3">QLD</option>
@@ -211,8 +211,8 @@
             <option value="8">ACT</option>
         </select>
 
-        <label for="pstcode">Post Code</label>
-        <input type="text" name="pstcode" id="pstcode" placeholder="PostCode" pattern="[0-9]{4}" maxlength="4" required/>
+        <label for="Post_Code">Post Code</label>
+        <input type="text" name="Post_Code" id="Post_Code" placeholder="PostCode" pattern="[0-9]{4}" maxlength="4" required/>
     </p>
 </fieldset>
 
@@ -285,9 +285,9 @@
 
 
 <fieldset>
-    <label for="skills2">Extra Skills</label>
+    <label for="Extra_Skills">Extra Skills</label>
         <br>
-        <textarea required id="skills2" name="skills2" rows="7" cols="40" placeholder="Write any other skills you have..."></textarea>
+        <textarea required id="Extra_Skills" name="Extra_Skills" rows="7" cols="40" placeholder="Write any other skills you have..."></textarea>
 </fieldset>
 
 <fieldset>
@@ -300,9 +300,9 @@
     </p>
     
     <p>
-        <label for="wright_cl">Or type your cover letter</label>
+        <label for="Write_Letter">Or type your cover letter</label>
         <br>
-        <textarea id="wright_cl" name="wright_cl" rows="4" cols="40" placeholder="Type you cover letter here..."></textarea>
+        <textarea id="Write_Letter" name="Write_Letter" rows="4" cols="40" placeholder="Type you cover letter here..."></textarea>
     </p>
 </fieldset>
 
