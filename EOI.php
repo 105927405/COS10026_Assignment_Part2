@@ -23,11 +23,11 @@
 <!--personal infomation-->
 <body>
 <fieldset>
-    <div><label for="first_name">First Name</label>
-        <input type="text" name="first_name" pattern="[A-Za-z]+" id="first_name" maxlength="20" size="10" placeholder="First Name" required/>
+    <div><label for="F_name">First Name</label>
+        <input type="text" name="F_name" pattern="[A-Za-z]+" id="F_name" maxlength="20" size="10" placeholder="First Name" required/>
 
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" pattern="[A-Za-z]+" id="last_name" maxlength="20" size="10" placeholder="Last Name" required/>
+        <label for="L_name">Last Name</label>
+        <input type="text" name="L_name" pattern="[A-Za-z]+" id="L_name" maxlength="20" size="10" placeholder="Last Name" required/>
         <br>
 
         <label for="DOB">Date of Birth</label>
@@ -37,30 +37,30 @@
 
 <fieldset>
     <p>
-        <label for="email" class="email"> Email </label>
-        <input type="email" name="email" id="email" placeholder="email" required/>
+        <label for="Email" class="Email"> Email </label>
+        <input type="email" name="Email" id="Email" placeholder="email" required/>
     </p>
 </fieldset>
 
 <fieldset>
     <p>
-        <label for="phone">Phone No.</label>
-        <input type="tel" name="phone" id="phone" 
+        <label for="Phone_NUM">Phone No.</label>
+        <input type="tel" name="Phone_NUM" id="Phone_NUM" 
         placeholder="Enter Phone Number" pattern="[0-9]{10}" maxlength="10" required/>
     </p>
 </fieldset>
 
 <fieldset>
     <p>
-        <label for="gender">Gender</label>
+        <label for="Gender">Gender</label>
         <br>
-        <input type="radio" name="gender" id="male" value="male" required/>
+        <input type="radio" name="Gender" id="male" value="male" required/>
         <label for="male">Male</label>
         
-        <input type="radio" name="gender" id="female" value="female"/>
+        <input type="radio" name="Gender" id="female" value="female"/>
         <label for="female">Female</label>
         
-        <input type="radio" name="gender" id="other" value="other"/>
+        <input type="radio" name="Gender" id="other" value="other"/>
         <label for="other">Other</label>
          
     </p>
@@ -70,8 +70,8 @@
 
 <fieldset>
     <div>
-        <label for="job">Job</label>
-        <select name="job" id="job" required>
+        <label for="Job">Job</label>
+        <select name="Job" id="Job" required>
             
         <option value="" disabled <?= empty($selectedJob) ? 'selected' :''?>>
             Please select a position</option>
@@ -131,9 +131,8 @@
     </div>
 </fieldset>
 -->
+
 <!--Work Availabibity-->
-
-
 <fieldset>
     <p>
         Please select days you are available and what times would work best.
@@ -141,51 +140,51 @@
 
     <label for="monday">Monday</label>
     <input type="checkbox" id="monday" name="monday"/>
-    <input type="time" id="monday-start" name="monday-start"/>
+    <input type="time" id="montimein" name="montimein"/>
     <label for="monday" class="till"> till </label>
-    <input type="time" id="monday-end" name="monday-end"/>
+    <input type="time" id="montimeout" name="montimeout"/>
     <br>
 
     <label for="tuesday">Tuesday</label>
     <input type="checkbox" id="tuesday" name="tuesday"/>
-    <input type="time" id="tuesday-start" name="tuesday-start"/>
+    <input type="time" id="tuetimein" name="tuetimein"/>
     <label for="tuesday" class="till"> till </label>
-    <input type="time" id="tuesday-end" name="tuesday-end"/>
+    <input type="time" id="tuetimeout" name="tuetimeout"/>
     <br>
 
     <label for="wednesday">Wednesday</label>
     <input type="checkbox" id="wednesday" name="wednesday"/>
-    <input type="time" id="wednesday-start" name="wednesday-start"/>
+    <input type="time" id="wedtimein" name="wedtimein"/>
     <label for="wednesday" class="till"> till </label>
-    <input type="time" id="wednesday-end" name="wednesday-end"/>
+    <input type="time" id="wedtimeout" name="wedtimeout"/>
     <br>
 
     <label for="thursday">Thursday</label>
     <input type="checkbox" id="thursday" name="thursday"/>
-    <input type="time" id="thursday-start" name="thursday-start"/>
+    <input type="time" id="thurtimein" name="thurtimein"/>
     <label for="thursday" class="till"> till </label>
-    <input type="time" id="thursday-end" name="thursday-end"/>
+    <input type="time" id="thurtimeout" name="thurtimeout"/>
     <br>
 
     <label for="friday">Friday</label>
     <input type="checkbox" id="friday" name="friday"/>
-    <input type="time" id="friday-start" name="friday-start"/>
+    <input type="time" id="fritimein" name="fritimein"/>
     <label for="friday" class="till"> till </label>
-    <input type="time" id="friday-end" name="friday-end"/>
+    <input type="time" id="fritimeout" name="fritimeout"/>
     <br>
 
     <label for="saturday">Saturday</label>
     <input type="checkbox" id="saturday" name="saturday"/>
-    <input type="time" id="saturday-start" name="saturday-start"/>
+    <input type="time" id="sattimein" name="sattimein"/>
     <label for="saturday" class="till"> till </label>
-    <input type="time" id="saturday-end" name="saturday-end"/>
+    <input type="time" id="sattimeout" name="sattimeout"/>
     <br>
 
     <label for="sunday">Sunday</label>
     <input type="checkbox" id="sunday" name="sunday"/>
-    <input type="time" id="sunday-start" name="sunday-start"/>
+    <input type="time" id="suntimein" name="suntimein"/>
     <label for="sunday" class="till"> till </label>
-    <input type="time" id="sunday-end" name="sunday-end"/>
+    <input type="time" id="suntimeout" name="suntimeout"/>
     
 </fieldset>
 
@@ -293,10 +292,10 @@
 
 <fieldset>
     <p>
-        <label for="cl_upload">Upload Cover Letter</label>
+        <label for="Cover_Letter">Upload Cover Letter</label>
         <label class="UploadButton">
             Choose File
-        <input type="file" name="cl_upload" id="cl_upload"/>
+        <input type="file" name="Cover_Letter" id="Cover_Letter"/>
         </label>
     </p>
     
@@ -309,10 +308,10 @@
 
 <fieldset>
     <p>
-        <label for="res_upload">Upload Resume</label>
+        <label for="Resume">Upload Resume</label>
         <label class="UploadButton">
             Choose File
-            <input type="file" name="res_upload" id="res_upload" required/>
+            <input type="file" name="Resume" id="Resume" required/>
         </label>
     </p>
 </fieldset>

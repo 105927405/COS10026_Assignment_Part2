@@ -24,54 +24,56 @@ function to_null_if_empty($value)
         $Phone_NUM = $_POST['Phone_NUM'];
         $Gender = $_POST['Gender'];
 
+        $errors = [];
+
 // first name valadation
-        if (!preg_match('/^[A-Za-Z]=$/', $F_name))
+        if (!preg_match('/^[A-Za-Z]+$/', $F_name))
             {
-                $errors[] = "First Name must only contain letters"
+                $errors[] = "First Name must only contain letters";
             }
 // last name valadation
-         if (!preg_match('/^[A-Za-Z]=$/', $L_name))
+         if (!preg_match('/^[A-Za-Z]+$/', $L_name))
             {
-                $errors[] = "Last Name must only contain letters"
+                $errors[] = "Last Name must only contain letters";
             }
 // phone number valadation
-         if (!preg_match('/^[0-9]{10}=$/', $Phone_NUM))
+         if (!preg_match('/^[0-9]{10}$/', $Phone_NUM))
             {
-                $errors[] = "Phone number must only have 10 numbers"
+                $errors[] = "Phone number must only have 10 numbers";
             }
 //job selection
         $Job = $_POST['Job'];
 //days applicant is available and the time they can work
         $monday = isset($_POST['monday']) ?1:0;
-        $mondaystart = to_null_if_empty($_POST['monday-start']);
-        $mondayend = to_null_if_empty($_POST['monday-end']);
+        $montimein = to_null_if_empty($_POST['montimein']);
+        $montimeout = to_null_if_empty($_POST['montimeout']);
         $tuesday = isset($_POST['tuesday']) ?1:0;
-        $tuesdaystart = to_null_if_empty($_POST['tuesday-start']);
-        $tuesdayend = to_null_if_empty($_POST['tuesday-end']);
+        $tuetimein = to_null_if_empty($_POST['tuetimein']);
+        $tuetimeout = to_null_if_empty($_POST['tuetimeout']);
         $wednesday = isset($_POST['wednesday']) ?1:0;
-        $wednesdaystart = to_null_if_empty($_POST['wednesday-start']);
-        $wednesdayend = to_null_if_empty($_POST['wednesday-end']);
+        $wedtimein = to_null_if_empty($_POST['wedtimein']);
+        $wedtimeout = to_null_if_empty($_POST['wedtimeout']);
         $thursday = isset($_POST['thursday']) ?1:0;
-        $thursdaystart = to_null_if_empty($_POST['thursday-start']);
-        $thursdayend = to_null_if_empty($_POST['thursday-end']);
+        $thurtimein = to_null_if_empty($_POST['thurtimein']);
+        $thurtimeout = to_null_if_empty($_POST['thurtimeout']);
         $friday = isset($_POST['friday']) ?1:0;
-        $fridaystart = to_null_if_empty($_POST['friday-start']);
-        $fridayend = to_null_if_empty($_POST['friday-end']);
+        $fritimein = to_null_if_empty($_POST['fritimein']);
+        $fritimeout = to_null_if_empty($_POST['fritimeout']);
         $saturday = isset($_POST['saturday']) ?1:0;
-        $saturdaystart = to_null_if_empty($_POST['saturday-start']);
-        $saturdayend = to_null_if_empty($_POST['saturday-end']);
+        $sattimein = to_null_if_empty($_POST['sattimein']);
+        $sattimeout = to_null_if_empty($_POST['sattimeout']);
         $sunday = isset($_POST['sunday']) ?1:0;
-        $sundaystart = to_null_if_empty($_POST['sunday-start']);
-        $sundayend = to_null_if_empty($_POST['sunday-end']);
+        $suntimein = to_null_if_empty($_POST['suntimein']);
+        $suntimeout = to_null_if_empty($_POST['suntimeout']);
 //home address for applicant
         $Address = $_POST['Address'];
         $Suburb = $_POST['Suburb'];
         $State = $_POST['State'];
         $Post_Code = $_POST['Post_Code'];
  // phone number valadation
-         if (!preg_match('/^[0-9]{4}=$/', $Post_Code))
+         if (!preg_match('/^[0-9]{4}$/', $Post_Code))
             {
-                $errors[] = "Post Code must only have 4 numbers"
+                $errors[] = "Post Code must only have 4 numbers";
             }
 //preselected skills the applicants can pick from
         $communication = isset($_POST['communication']) ?1:0;
@@ -87,6 +89,15 @@ function to_null_if_empty($value)
         $JS = isset($_POST['Js']) ?1:0;
         $Extra_Skills = $_POST['Extra_Skills'];
         $Write_Letter = $_POST['Write_Letter'];
+
+        if (!empty($errors))
+            {
+                foreach ($errors as $error)
+                    {
+                        echo "<p>$error</p>";
+                    }
+                    exit();
+            }
         
 //file upload for both the coverletter and the resume
         if (!isset($_FILES['Cover_Letter']) || $_FILES['Cover_Letter']['error'] !==0)
