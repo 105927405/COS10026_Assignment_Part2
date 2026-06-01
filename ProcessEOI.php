@@ -17,14 +17,14 @@ function to_null_if_empty($value)
     //Pull data from form via $_POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //peronsal infomation 
-        $firstname = $_POST['F_name'];
-        $lastname = $_POST['L_name'];
+        $F_name = $_POST['F_name'];
+        $L_name = $_POST['L_name'];
         $DOB = $_POST['DOB'];
-        $email = $_POST['Email'];
-        $phone = $_POST['Phone_NUM'];
-        $gender = $_POST['Gender'];
+        $Email = $_POST['Email'];
+        $Phone_NUM = $_POST['Phone_NUM'];
+        $Gender = $_POST['Gender'];
 //job selection
-        $job = $_POST['Job']
+        $Job = $_POST['Job'];
 //days applicant is available and the time they can work
         $monday = isset($_POST['monday']) ?1:0;
         $mondaystart = to_null_if_empty($_POST['monday-start']);
@@ -48,10 +48,10 @@ function to_null_if_empty($value)
         $sundaystart = to_null_if_empty($_POST['sunday-start']);
         $sundayend = to_null_if_empty($_POST['sunday-end']);
 //home address for applicant
-        $address = $_POST['Address'];
-        $suburb = $_POST['Suburb'];
-        $state = $_POST['State'];
-        $postcode = $_POST['Post_Code'];
+        $Address = $_POST['Address'];
+        $Suburb = $_POST['Suburb'];
+        $State = $_POST['State'];
+        $Post_Code = $_POST['Post_Code'];
 //preselected skills the applicants can pick from
         $communication = isset($_POST['communication']) ?1:0;
         $teamwork = isset($_POST['teamwork']) ?1:0;
@@ -64,8 +64,8 @@ function to_null_if_empty($value)
         $BTS = isset($_POST['BTS']) ?1:0;
         $ATS = isset($_POST['ATS']) ?1:0;
         $JS = isset($_POST['Js']) ?1:0;
-        $extraskills = $_POST['Extra_Skills'];
-        $writeletter = $_POST['Write_Letter'];
+        $Extra_Skills = $_POST['Extra_Skills'];
+        $Write_Letter = $_POST['Write_Letter'];
         
 //file upload for both the coverletter and the resume
         if (!isset($_FILES['Cover_Letter']) || $_FILES['Cover_Letter']['error'] !==0)
@@ -82,7 +82,7 @@ function to_null_if_empty($value)
         $coverletter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
         $resume = file_get_contents($_FILES['Resume']['tmp_name']);
 
-        $stmt = $conn->prepare("INSERT INTO EOI) (F_name, L_name, DOB, Email, Phone_NUM, Gender,
+        $stmt = $conn->prepare("INSERT INTO EOI (F_name, L_name, DOB, Email, Phone_NUM, Gender,
         Job, monday, montimein, montimeout, tuesday, tuetimein, 
         tuetimeout, wednesday, wedtimein, wedtimeout, thursday, 
         thurtimein, thurtimeout, friday, fritimein, fritimeout, 
@@ -95,5 +95,37 @@ function to_null_if_empty($value)
         ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
         );        
 
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        //bind parameters
+        $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiissss",
+        $F_name, $L_name, $DOB, $Email, $Phone_NUM, $Gender, $Job, 
+        $monday, $montimein, $montimeout, $tuesday, $tuetimein, $tuetimeout, 
+        $wednesday, $wedtimein, $wedtimeout, $thursday, $thurtimein, $thurtimeout, 
+        $friday, $fritimein, $fritimeout, $saturday, $sattimein, $sattimeout, 
+        $sunday, $suntimein, $suntimeout, $Address, $Suburb, $State, $Post_Code, 
+        $communication, $teamwork, $time, $cs, $BPS, $APS, $BDS, $ADS, $BTS, $ATS, $JS, 
+        $Extra_Skills, $Cover_Letter, $Write_Letter, $Resume
+        );
+
+        // Execute and check success
+        if ($stmt->execute()) {
+            // Redirect on success
+            header('Location: EOI.php?message=' . urlencode('Application submitted successfully.'));
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conn->close();
+
+
+
+
+
 
     }
+    
