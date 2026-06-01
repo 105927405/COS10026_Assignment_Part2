@@ -18,7 +18,7 @@
 <html lang = "en">
 <?php include 'header.inc'; ?>
     
-<form method="post" action="ProcessEOI.php">
+<form method="post" action="ProcessEOI.php" enctype="multipart/form-data">
 
 <!--personal infomation-->
 <body>
