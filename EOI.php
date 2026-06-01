@@ -12,6 +12,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -82,9 +83,11 @@
         $result = $conn->query($sql);
 
         if ($result && $result->num_rows > 0){
+            echo "<p>Comparing $selectedJob with " . $row['REF_NUM'] . "</p>";
+
             while ($row = $result->fetch_assoc())
                 {
-                    $selected = ($selectedJobs ==$row['REF_NUM'])
+                    $selected = ($selectedJob ==$row['REF_NUM'])
                         ? 'selected'
                         : '';
                     ?>

@@ -111,8 +111,8 @@ function to_null_if_empty($value)
         }
 
 
-        $coverletter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
-        $resume = file_get_contents($_FILES['Resume']['tmp_name']);
+        $Cover_Letter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
+        $Resume = file_get_contents($_FILES['Resume']['tmp_name']);
 
         $stmt = $conn->prepare("INSERT INTO EOI (F_name, L_name, DOB, Email, Phone_NUM, Gender,
         Job, monday, montimein, montimeout, tuesday, tuetimein, 
