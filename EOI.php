@@ -18,7 +18,7 @@
 <html lang = "en">
 <?php include 'header.inc'; ?>
     
-<form method="post" action="ProcessEOI">
+<form method="post" action="ProcessEOI.php">
 
 <!--personal infomation-->
 <body>
@@ -253,17 +253,17 @@
 
         <label for="APS">
             Advanced Programming Skills
-            <input type="checkbox" id="APS" name="APS" required/>
+            <input type="checkbox" id="APS" name="APS" />
         </label>
 
         <label for="BDS">
             Basic Design Skills
-            <input type="checkbox" id="BDS" name="BDS" required/>
+            <input type="checkbox" id="BDS" name="BDS" />
         </label>
 
         <label for="ADS">
             Advanced Design Skills
-            <input type="checkbox" id="ADS" name="ADS" required/>
+            <input type="checkbox" id="ADS" name="ADS" />
         </label>
 
         <label for="BTS">
