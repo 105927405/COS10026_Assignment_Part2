@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-    <meta name="description" content="Blade EduNET Comapny Website"/>
-    <meta name="keywords" content="job application, education, work, development"/>
-    <meta name="author" content="Blake, Marcus, Aaron"/>
+    <meta charset="utf-8">
+    <meta name="description" content="Blade EduNET Company Website">
+    <meta name="keywords" content="job application, education, work, development">
+    <meta name="author" content="Blake, Marcus, Aaron">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blade EduNET</title>
-    <link href="Styles/Style.css" rel="stylesheet"/>
+    <title>Blade EduNET - About Us</title>
+    <link href="Styles/Style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -17,168 +17,207 @@
 
 <div class="BackgroundContainer">
 
-<div class="TextContainer">
-<article>
-    <p>Using <strong>Blade EduNET</strong> you will find the lastest educational support and applications to help you and your students in whatever field of education you may be in. From Science, English, Law to Product Design, you will be able to find material to help you achieve greatness. <br>
-      Because at <strong>Blade EduNET</strong>, we strive to provide the best educational support and appications for the next generation. We find it very important that education is easily accessible to everyone and it always moving forward with the times. Without a good foundation the next generation will not reach greatness. <br>
-      The core of <strong>Blade EduNET</strong> follows our motto <strong>"No education is the restriction of the mind"</strong> <br>
- </p>
+    <div class="TextContainer">
 
-    <hr class="hrSpecial">
-</article>
-</div>
+        <article>
 
-<h3>About the Group</h3>
+            <h2>About Blade EduNET</h2>
 
-<?php 
+            <p>
+                Using <strong>Blade EduNET</strong> you will find the latest educational support and applications to help you and your students in whatever field of education you may be in. From Science, English, Law to Product Design, you will be able to find material to help you achieve greatness.
+                <br><br>
+
+                Because at <strong>Blade EduNET</strong>, we strive to provide the best educational support and applications for the next generation. We find it very important that education is easily accessible to everyone and is always moving forward with the times. Without a good foundation the next generation will not reach greatness.
+                <br><br>
+
+                The core of <strong>Blade EduNET</strong> follows our motto:
+                <strong>"No education is the restriction of the mind"</strong>
+            </p>
+
+            <hr class="hrSpecial">
+
+        </article>
+
+    </div>
+
+    <h3>About the Group</h3>
+
+<?php
+
 require_once 'settings.php';
 
 $conn = new mysqli($host, $user, $password, $database);
-    if ($conn->connect_error) {
-        die("Database connection failed: " . $conn->connect_error);
-    }
+
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
 
 $sql = "SELECT * FROM about";
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
+
     while ($row = $result->fetch_assoc()) {
 ?>
 
-<div class="PersonContainer">
-    <section>
-        <h4><?php echo $row['Name']; ?></h4>
-        <p><?php echo $row['Contributions']; ?></p>
-    </section>
-</div>
+    <div class="PersonContainer">
+
+        <section>
+
+            <h4><?php echo htmlspecialchars($row['Name']); ?></h4>
+
+            <p>
+                <?php echo htmlspecialchars($row['Contributions']); ?>
+            </p>
+
+        </section>
+
+    </div>
 
 <?php
     }
 }
+
 $conn->close();
 ?>
 
-<hr class="hrSpecial">
+    <hr class="hrSpecial">
 
-<h4>Fun Facts About Us</h4>
+    <h3>Fun Facts About Us</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Hobbies</th>
-    <th>Uni Club</th>
-    <th>Favourite Song</th>
-    <th>Favourite Food</th>
-    <th>Other Fun Facts</th>
-  </tr>
+    <table>
 
-  <tr>
-    <td>Aaron</td>
-    <td>24</td>
-    <td>Motorsports, Gaming, History</td>
-    <td>Swinburne Race Team</td>
-    <td>Let Down by Radiohead</td>
-    <td>Seven Stars Menthol and Hibiki</td>
-    <td>Went to Chisholm TAFE before University</td>
-  </tr>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Hobbies</th>
+            <th>Uni Club</th>
+            <th>Favourite Song</th>
+            <th>Favourite Food</th>
+            <th>Other Fun Facts</th>
+        </tr>
 
-  <tr>
-    <td>Marcus</td>
-    <td>24</td>
-    <td>Gaming, Anime, Reading</td>
-    <td>Swinburne Rover Team</td>
-    <td>Outlaws Get No Entry</td>
-    <td>Burgers</td>
-    <td>Spent 7 years in St John's</td>
-  </tr>
+        <tr>
+            <td>Aaron</td>
+            <td>24</td>
+            <td>Motorsports, Gaming, History</td>
+            <td>Swinburne Race Team</td>
+            <td>Let Down by Radiohead</td>
+            <td>Seven Stars Menthol and Hibiki</td>
+            <td>Went to Chisholm TAFE before University</td>
+        </tr>
 
-  <tr>
-    <td>Blake</td>
-    <td>19</td>
-    <td>Gaming, Networking, Music</td>
-    <td>Swinburne Rover Team</td>
-    <td>Taylor Swift</td>
-    <td>Pasta & Mango</td>
-    <td>Built a Server farm at 15</td>
-  </tr>
-</table>
+        <tr>
+            <td>Marcus</td>
+            <td>24</td>
+            <td>Gaming, Anime, Reading</td>
+            <td>Swinburne Rover Team</td>
+            <td>Outlaws Get No Entry</td>
+            <td>Burgers</td>
+            <td>Spent 7 years in St John's</td>
+        </tr>
 
- <hr class = "hrSpecial">
-  <section>
+        <tr>
+            <td>Blake</td>
+            <td>19</td>
+            <td>Gaming, Networking, Music</td>
+            <td>Swinburne Rover Team</td>
+            <td>Taylor Swift</td>
+            <td>Pasta &amp; Mango</td>
+            <td>Built a Server farm at 15</td>
+        </tr>
 
-	<h4>Classes</h4>
-    <dl>
-		<dt><strong>Web Technology</strong></dt><dd>COS10026</dd><dd>Atie Kia</dd>
-	
-  		<dt><strong>User Experience Design Project</strong></dt><dd>ICT20025</dd><dd>Dr Karola von Baggo</dd>
+    </table>
 
-  		<dt><strong>Network Routing Principles</strong></dt><dd>TNE20002/TNE70003</dd><dd>Patrick Cage</dd>
+    <hr class="hrSpecial">
 
-		<dt><strong>Network Security and Resilience</strong></dt><dd>TNE30009</dd><dd>Peter Branch</dd>
+    <section>
 
-</dl>
-</section>
+        <h3>Classes</h3>
 
-<hr class="hrSpecial">
+        <dl>
 
-<h3>Time Table</h3>
+            <dt><strong>Web Technology</strong></dt>
+            <dd>COS10026</dd>
+            <dd>Atie Kia</dd>
 
-<table class="timetable">
-  <tr>
-    <th>Time</th>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-  </tr>
+            <dt><strong>User Experience Design Project</strong></dt>
+            <dd>ICT20025</dd>
+            <dd>Dr Karola von Baggo</dd>
 
-  <tr>
-    <td>8:30 - 10:30</td>
-    <td>ICT20025</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>TNE20002</td>
-  </tr>
+            <dt><strong>Network Routing Principles</strong></dt>
+            <dd>TNE20002/TNE70003</dd>
+            <dd>Patrick Cage</dd>
 
-  <tr>
-    <td>10:30 - 12:30</td>
-    <td></td>
-    <td>TNE30009</td>
-    <td></td>
-    <td></td>
-    <td>TNE20002</td>
-  </tr>
+            <dt><strong>Network Security and Resilience</strong></dt>
+            <dd>TNE30009</dd>
+            <dd>Peter Branch</dd>
 
-  <tr>
-    <td>12:30 - 14:30</td>
-    <td>TNE30009</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+        </dl>
 
-  <tr>
-    <td>13:30 - 15:30</td>
-    <td>TNE20002</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+    </section>
 
-  <tr>
-    <td>14:30 - 16:30</td>
-    <td></td>
-    <td>ICT20025</td>
-    <td></td>
-    <td></td>
-    <td>COS10026</td>
-  </tr>
-</table>
+    <hr class="hrSpecial">
+
+    <h3>Time Table</h3>
+
+    <table class="timetable">
+
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+
+        <tr>
+            <td>8:30 - 10:30</td>
+            <td>ICT20025</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TNE20002</td>
+        </tr>
+
+        <tr>
+            <td>10:30 - 12:30</td>
+            <td></td>
+            <td>TNE30009</td>
+            <td></td>
+            <td></td>
+            <td>TNE20002</td>
+        </tr>
+
+        <tr>
+            <td>12:30 - 14:30</td>
+            <td>TNE30009</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>13:30 - 15:30</td>
+            <td>TNE20002</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>14:30 - 16:30</td>
+            <td></td>
+            <td>ICT20025</td>
+            <td></td>
+            <td></td>
+            <td>COS10026</td>
+        </tr>
+
+    </table>
 
 </div>
 
