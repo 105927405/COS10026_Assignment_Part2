@@ -18,7 +18,7 @@
 <html lang = "en">
 <?php include 'header.inc'; ?>
     
-<form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php">
+<form method="post" action="ProcessEOI">
 
 <!--personal infomation-->
 <body>
@@ -75,6 +75,7 @@
             
         <option value="" disabled <?= empty($selectedJob) ? 'selected' :''?>>
             Please select a position</option>
+        
             
         <?php
         $sql = "SELECT REF_NUM, Job_Name FROM Jobs";
