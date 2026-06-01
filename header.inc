@@ -18,5 +18,6 @@
             <a href = "eoi.php">Job Application</a>
             <a href = "software.php">Our Software</a>
             <a href = "about.php">About Us</a>
+            <a href = "Login_Page.php">Login</a>
         </nav>
     </header>
