@@ -144,10 +144,13 @@ function to_null_if_empty($value)
 
         // Execute and check success
         if ($stmt->execute()) {
-            // Redirect on success
-            header('Location: EOI.php?message=' . urlencode('Application submitted successfully.'));
-            exit();
-        } else {
+    echo "<script>
+            alert('Application submitted successfully!');
+            window.location.href='EOI.php';
+          </script>";
+    exit();
+    } 
+        else {
             echo "Error: " . $stmt->error;
         }
 
