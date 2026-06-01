@@ -17,6 +17,9 @@ $message = ''; //variable used for success messages, like for making an account
 if (isset($_GET['message'])) {
     $message = htmlspecialchars($_GET['message']);
 }
+if (isset($_GET['error'])) {
+    $error = htmlspecialchars($_GET['error']);
+}
 
 //check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

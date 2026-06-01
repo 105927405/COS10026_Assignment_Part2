@@ -17,7 +17,7 @@ require_once 'settings.php';
 //ini_set('display_errors', 1);
 
 if (!isset($_SESSION["isloggedon"]) || $_SESSION["isloggedon"] !== true || $_SESSION["role"] !== 'HR') {
-    header("Location: Login_Page.php?message=" . urlencode("You must be logged in with the 'HR' role to access this page."));
+    header("Location: Login_Page.php?error=" . urlencode("You must be logged in with a user with the 'HR' role to access this page."));
     exit();
 }
 
@@ -112,6 +112,11 @@ if (isset($_GET['ROLEtoggle']) && is_numeric($_GET['ROLEtoggle'])){
 
 }
 
+if (isset($_GET['EOIview']) && is_numeric($_GET['EOIview'])){
+    $toggle_id = intval($_GET['EOIview']);
+
+}
+
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -127,6 +132,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         } else {
             header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode("Failed to update password."));
+            exit();
+        }
+    }
+
+    if ($action === "create_job") {
+        
+        $Job_Name = trim($_POST["Job_Name"]);
+        $Pay = trim($_POST["Pay"]);
+        $Manager = trim($_POST["Manager"]);
+        $Hours = intval($_POST["Hours"]);
+        $E_Skills = trim($_POST["E_Skills"]);
+        $P_Skills = trim($_POST["P_Skills"]);
+        $Description = trim($_POST["Description"]);
+
+        $stmt = $conn->prepare("INSERT INTO Jobs (Job_Name, Pay, Manager, Hours, E_Skills, P_Skills, Description) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        
+        $stmt->bind_param("sssisss", $Job_Name, $Pay, $Manager, $Hours, $E_Skills, $P_Skills, $Description);
+
+        if ($stmt->execute()) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("Job created successfully."));
+            exit();
+        } else {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode("Failed to create job."));
             exit();
         }
     }
@@ -151,12 +179,13 @@ if (isset($_GET['message'])) {
 ?>
 
 
-    <form method = "GET" action= "">
-    <input type = "text" name = "searchEOI" placeholder = "Search EOI Database" value = "<?= htmlspecialchars($searchEOI) ?>">   <!--htmlspecialchars uses as a security feature-->
-    <button type = "submit" value = "Search">Search</button>
+    
 </form>
 <hr class = "hrSpecial">
 <h3> Applicants (EOI Table) </h3>
+<form method = "GET" action= "">
+    <input type = "text" name = "searchEOI" placeholder = "Search EOI Database" value = "<?= htmlspecialchars($searchEOI) ?>">   <!--htmlspecialchars uses as a security feature-->
+    <button type = "submit" value = "Search">Search</button>
 <table>
     <tr>
         <th> EOI ID </th>
@@ -170,6 +199,7 @@ if (isset($_GET['message'])) {
         <th> Resume </th>
         <th> Status </th>
         <th> Change </th>
+        <th> View All </th>
         <th> Delete </th>
     </tr>
 
@@ -205,6 +235,7 @@ if (!$EOIresults) {
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=res'>Download</a></td>
                 <td>" . $row['Status'] . "</td>
                 <td><a href='?EOItoggle=" . $row['EOI_id'] . "' onclick=\"return confirm('Change status of applicant ID {$row['EOI_id']}?');\">Toggle</a></td>
+                <td><a href='?EOIview=" . $row['EOI_id'] . "' onclick=\"return confirm('View all application data?');\">View</a></td>
                 <td><a href='?EOIdelete=" . $row['EOI_id'] . "' onclick=\"return confirm('Are you sure you want to delete applicant ID {$row['EOI_id']}?');\">Delete</a></td>
                 </tr>"; 
     }
@@ -215,18 +246,20 @@ if (!$EOIresults) {
 </table>
 
 
-    <form method = "GET" action= "">
+    
+<hr class = "hrSpecial">
+<h3> Jobs (Jobs Table) </h3>
+<form method = "GET" action= "">
     <input type = "text" name = "searchJOB" placeholder = "Search JOBs Database" value = "<?= htmlspecialchars($searchJOB) ?>">   <!--htmlspecialchars uses as a security feature-->
     <button type = "submit" value = "Search">Search</button>
 </form>
-<hr class = "hrSpecial">
-<h3> Jobs (Jobs Table) </h3>
 <table>
     <tr>
         <th> Job REF </th>
         <th> Job Name </th>
         <th> Pay </th>
-        <th> DOB </th>
+        <th> Manager </th>
+        <th> Hours </th>
         <th> E-Skills </th>
         <th> P-Skills </th>
         <th> Description</th>
@@ -235,15 +268,17 @@ if (!$EOIresults) {
 
 <?php
     $JOBquery = ($searchJOB) ?
-    "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description 
+    "SELECT REF_NUM, Job_Name, Pay, Manager, Hours, E_Skills, P_Skills, Description 
     FROM Jobs
     WHERE REF_NUM LIKE '%$searchJOB_safe%'
     OR Job_Name LIKE '%$searchJOB_safe%'
     OR Pay LIKE '%$searchJOB_safe%'
+    OR Manager LIKE '%$searchJOB_safe%'
+    OR Hours LIKE '%$searchJOB_safe%'
     OR E_Skills LIKE '%$searchJOB_safe%'
     OR P_Skills LIKE '%$searchJOB_safe%'
     OR Description LIKE '%$searchJOB_safe%'"
-    : "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description FROM Jobs"; //show all results when search is empty
+    : "SELECT REF_NUM, Job_Name, Pay, Manager, Hours, E_Skills, P_Skills, Description FROM Jobs"; //show all results when search is empty
 
 
 $JOBresults = mysqli_query($conn, $JOBquery);
@@ -256,6 +291,8 @@ if (!$JOBresults) {
                 <td>" . $row['REF_NUM'] . "</td>
                 <td>" . $row['Job_Name'] . "</td>
                 <td>" . $row['Pay'] . "</td>
+                <td>" . $row['Manager'] . "</td>
+                <td>" . $row['Hours'] . "</td>
                 <td>" . $row['E_Skills'] . "</td>
                 <td>" . $row['P_Skills'] . "</td>
                 <td>" . $row['Description'] . "</td>
@@ -268,12 +305,27 @@ if (!$JOBresults) {
 ?>
 </table>
 
-    <form method = "GET" action= "">
-    <input type = "text" name = "searchUSER" placeholder = "Search USER Database" value = "<?= htmlspecialchars($searchUSER) ?>">   <!--htmlspecialchars uses as a security feature-->
-    <button type = "submit" value = "Search">Search</button>
+<hr class = "hrSpecial">
+<h3> Create Job </h3>
+<form method = "post">
+        <input type = "hidden" name = "action" value = "create_job">
+        <input type = "text" name = "Job_Name" placeholder = "Job Name" required>
+        <input type = "text" name = "Pay" placeholder = "Pay" required>
+        <input type = "text" name = "Manager" placeholder = "Manager Name" required>
+        <input type = "int" name = "Hours" placeholder = "Hours (Per day)" required>
+        <input type = "text" name = "E_Skills" placeholder = "Essential Skills" required>
+        <input type = "text" name = "P_Skills" placeholder = "Prefered Skills" required>
+        <input type = "text" name = "Description" placeholder = "Description" required>
+        <button type = "submit">Create Job</button>
+    </form>
+
+    
 </form>
 <hr class = "hrSpecial">
 <h3> Users (User Table) </h3>
+<form method = "GET" action= "">
+    <input type = "text" name = "searchUSER" placeholder = "Search USER Database" value = "<?= htmlspecialchars($searchUSER) ?>">   <!--htmlspecialchars uses as a security feature-->
+    <button type = "submit" value = "Search">Search</button>
 <table>
     <tr>
         <th> User ID </th>
@@ -319,6 +371,16 @@ if (!$USERresults) {
 mysqli_close($conn);
 ?>
 </table>
+
+    <hr class = "hrSpecial">
+    <h3>Change User Password</h3>
+    <form method = "post">
+        <input type = "hidden" name = "action" value = "change_password">
+        <input type = "text" name = "target_user" placeholder = "Username" required>
+        <input type = "password" name = "new_password" placeholder = "New Password" required>
+        <button type = "submit">Update Password</button>
+    </form>
+
 
 </div>
 <?php include 'footer.inc'; ?>
