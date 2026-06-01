@@ -51,9 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //redirect based on user role
             switch ($role) {
-                case 'IT':
-                    header("Location: IT_Admin.php");
-                    exit();
                 case 'HR':
                     header("Location: manage.php");
                     exit();
@@ -83,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     <?php include 'header.inc'; ?>
 
+    <div class = "TextContainer">
     <h2>Login</h2>
     <?php if ($message): ?>
         <div style = "color: green;"><?php echo $message; ?></div> <!inline css to make messages green>
@@ -100,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit" name="submit">Login</button>
     </form>
      <a href = "Create_User.php">Create An Account?</a>
-
+    </div>
 
  <?php include 'footer.inc'; ?>
 </body>

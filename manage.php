@@ -53,7 +53,7 @@ if (isset($_GET['EOIdelete']) && is_numeric($_GET['EOIdelete'])) {
 
 if (isset($_GET['JOBdelete']) && is_numeric($_GET['JOBdelete'])) {
     $delete_id = intval($_GET['JOBdelete']);
-    $stmt = $conn->prepare("DELETE FROM $EOItable WHERE $EOIid_col = ?");
+    $stmt = $conn->prepare("DELETE FROM $JOBtable WHERE $JOBid_col = ?");
     $stmt->bind_param("i", $delete_id);
     $stmt->execute();
     $stmt->close();
@@ -61,9 +61,19 @@ if (isset($_GET['JOBdelete']) && is_numeric($_GET['JOBdelete'])) {
     exit();
 }
 
+if (isset($_GET['USERdelete']) && is_numeric($_GET['USERdelete'])) {
+    $delete_id = intval($_GET['USERdelete']);
+    $stmt = $conn->prepare("DELETE FROM $USERtable WHERE $USERid_col = ?");
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("ID $delete_id deleted successfully from $USERtable."));
+    exit();
+}
+
 if (isset($_GET['EOItoggle']) && is_numeric($_GET['EOItoggle'])){
     $toggle_id = intval($_GET['EOItoggle']);
-    $stmt = $conn->prepare("SELECT status FROM $EOItable WHERE $EOIid_col = ?");
+    $stmt = $conn->prepare("SELECT Status FROM $EOItable WHERE $EOIid_col = ?");
     $stmt->bind_param("i", $toggle_id);
     $stmt->execute();
     $stmt->bind_result($current_status);
@@ -71,13 +81,56 @@ if (isset($_GET['EOItoggle']) && is_numeric($_GET['EOItoggle'])){
     $stmt->close();
 
     $new_status = ($current_status === 'Accepted') ? 'Rejected' : 'Accepted';
-    $stmt = $conn->prepare("UPDATE $EOItable SET status = ? WHERE $EOIid_col = ?");
+    $stmt = $conn->prepare("UPDATE $EOItable SET Status = ? WHERE $EOIid_col = ?");
     $stmt->bind_param("si", $new_status, $toggle_id);
     $stmt->execute();
     $stmt->close();
 
-    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("Status updated to $new_status in $EOItable."));
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("EOI ID $toggle_id Status updated to $new_status in $EOItable."));
     exit();
+}
+
+if (isset($_GET['ROLEtoggle']) && is_numeric($_GET['ROLEtoggle'])){
+
+    $usertoggle_id = intval($_GET['ROLEtoggle']);
+
+    $stmt = $conn->prepare("SELECT Role FROM $USERtable WHERE $USERid_col = ?");
+    $stmt->bind_param("i", $usertoggle_id);
+    $stmt->execute();
+    $stmt->bind_result($current_role);
+    $stmt->fetch();
+    $stmt->close();
+
+    $new_role = ($current_role === 'HR') ? 'BLANK' : 'HR';
+    $stmt = $conn->prepare("UPDATE $USERtable SET Role = ? WHERE $USERid_col = ?");
+    $stmt->bind_param("si", $new_role, $usertoggle_id);
+    $stmt->execute();
+    $stmt->close();
+
+    header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("User ID $usertoggle_id Role updated to $new_role in $USERtable."));
+    exit();
+
+}
+
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $action = $_POST["action"];
+    $target_user = trim(strtolower($_POST["target_user"]));
+
+    if ($action === "change_password") {
+        $new_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE Users SET Password = ? WHERE Username = ?");
+        $stmt->bind_param("ss", $new_password, $target_user);
+        if ($stmt->execute()) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?message=" . urlencode("Password updated for $target_user."));
+            exit();
+        } else {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode("Failed to update password."));
+            exit();
+        }
+    }
+
 }
 ?>
 
@@ -85,7 +138,7 @@ if (isset($_GET['EOItoggle']) && is_numeric($_GET['EOItoggle'])){
 <html lang = "en">
 <?php include 'header.inc'; ?>
 <body>
-<div class = "ManageContainer">
+<div class = "TextContainer">
 
     
     <h2>Welcome to the HR Manager Dashboard, <?= $_SESSION['firstname'] ?> <?= $_SESSION['lastname'] ?></h2> 
@@ -119,9 +172,10 @@ if (isset($_GET['message'])) {
         <th> Change </th>
         <th> Delete </th>
     </tr>
+
 <?php
     $EOIquery = ($searchEOI) ?
-    "SELECT EOI_id, F_Name, L_Name, Email, Phone_Num, Job, Cover_Letter, Resume, status 
+    "SELECT EOI_id, F_Name, L_Name, Email, Phone_Num, Job, Cover_Letter, Resume, Status 
     FROM EOI
     WHERE EOI_id LIKE '%$searchEOI_safe%'
     OR F_Name LIKE '%$searchEOI_safe%'
@@ -131,8 +185,8 @@ if (isset($_GET['message'])) {
     OR Job LIKE '%$searchEOI_safe%'
     OR Cover_Letter LIKE '%$searchEOI_safe%'
     OR Resume LIKE '%$searchEOI_safe%'
-    OR status LIKE '%$searchEOI_safe%'"
-    : "SELECT EOI_id, F_Name, L_Name, Email, Phone_Num, Job, Cover_Letter, Resume, status FROM EOI"; //show all results when search is empty
+    OR Status LIKE '%$searchEOI_safe%'"
+    : "SELECT EOI_id, F_Name, L_Name, Email, Phone_Num, Job, Cover_Letter, Resume, Status FROM EOI"; //show all results when search is empty
 
 $EOIresults = mysqli_query($conn, $EOIquery);
 if (!$EOIresults) {
@@ -142,15 +196,14 @@ if (!$EOIresults) {
     while ($row = mysqli_fetch_assoc($EOIresults)) {
         echo "<tr>
                 <td>" . $row['EOI_id'] . "</td>
-                <td>" . $row['first_name'] . "</td>
-                <td>" . $row['last_name'] . "</td>
-                <td>" . $row['dob'] . "</td>
-                <td>" . $row['email'] . "</td>
-                <td>" . $row['phone'] . "</td>
-                <td>" . $row['job'] . "</td>
+                <td>" . $row['F_Name'] . "</td>
+                <td>" . $row['L_Name'] . "</td>
+                <td>" . $row['Email'] . "</td>
+                <td>" . $row['Phone_Num'] . "</td>
+                <td>" . $row['Job'] . "</td>
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=cl'>Download</a></td>
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=res'>Download</a></td>
-                <td>" . $row['status'] . "</td>
+                <td>" . $row['Status'] . "</td>
                 <td><a href='?EOItoggle=" . $row['EOI_id'] . "' onclick=\"return confirm('Change status of applicant ID {$row['EOI_id']}?');\">Toggle</a></td>
                 <td><a href='?EOIdelete=" . $row['EOI_id'] . "' onclick=\"return confirm('Are you sure you want to delete applicant ID {$row['EOI_id']}?');\">Delete</a></td>
                 </tr>"; 
@@ -159,6 +212,7 @@ if (!$EOIresults) {
     echo "<tr><td colspan='12'> No results found.</td></tr>";
 }
 ?>
+</table>
 
 
     <form method = "GET" action= "">
@@ -178,6 +232,7 @@ if (!$EOIresults) {
         <th> Description</th>
         <th> Delete </th>
     </tr>
+
 <?php
     $JOBquery = ($searchJOB) ?
     "SELECT REF_NUM, Job_Name, Pay, E_Skills, P_Skills, Description 
@@ -211,6 +266,7 @@ if (!$JOBresults) {
     echo "<tr><td colspan='12'> No results found.</td></tr>";
 }
 ?>
+</table>
 
     <form method = "GET" action= "">
     <input type = "text" name = "searchUSER" placeholder = "Search USER Database" value = "<?= htmlspecialchars($searchUSER) ?>">   <!--htmlspecialchars uses as a security feature-->
@@ -225,8 +281,10 @@ if (!$JOBresults) {
         <th> First Name </th>
         <th> Last Name </th>
         <th> Role </th>
+        <th> Change </th>
         <th> Delete </th>
     </tr>
+
 <?php
     $USERquery = ($searchUSER) ?
     "SELECT User_ID, Username, F_Name, L_Name, Role 
@@ -251,6 +309,7 @@ if (!$USERresults) {
                 <td>" . $row['F_Name'] . "</td>
                 <td>" . $row['L_Name'] . "</td>
                 <td>" . $row['Role'] . "</td>
+                <td><a href='?ROLEtoggle=" . $row['User_ID'] . "' onclick=\"return confirm('Are you sure you want to change the rol of User ID {$row['User_ID']}?');\">Change Role</a></td>
                 <td><a href='?USERdelete=" . $row['User_ID'] . "' onclick=\"return confirm('Are you sure you want to delete User ID {$row['User_ID']}?');\">Delete</a></td>
                 </tr>"; 
     }
@@ -259,6 +318,7 @@ if (!$USERresults) {
 }
 mysqli_close($conn);
 ?>
+</table>
 
 </div>
 <?php include 'footer.inc'; ?>

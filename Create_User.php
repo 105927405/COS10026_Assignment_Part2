@@ -84,6 +84,7 @@
 <html lang = "en">
     <?php include 'header.inc'; ?>
 
+    <div class = "TextContainer">
     <h2>Create User</h2>
     <?php if ($error): ?>
         <div style = "color: red;"><?php echo $error; ?></div>
@@ -103,6 +104,7 @@
 
         <button type="submit" name="submit">Create User</button>
     </form>
+    </div>
 
  <?php include 'footer.inc'; ?>
 </body>
