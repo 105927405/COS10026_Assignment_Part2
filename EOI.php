@@ -1,7 +1,11 @@
 <?php 
     $selectedJob = $_GET['job'] ?? '';
 
-    require_once 'setting.php';
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    require_once 'settings.php';
     
     $conn = new mysqli($host, $user, $password, $database);
 
