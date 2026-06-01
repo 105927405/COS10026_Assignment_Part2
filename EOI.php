@@ -1,7 +1,5 @@
 <?php 
-    include 'header.inc';
-
-    $selectedJob = $_GET['job'] ??';'
+    $selectedJob = $_GET['job'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -64,15 +62,15 @@
         <select name="job" id="job" required>
             <option value="" disabled <?= empty($selectedJob) ? 'selected' :''?>>
             Please select a position</option>
-            <option value="000A1"<?= $selectedJob == '000A1' ? 'selected' :''?>>
+            <option value="000A1" <?= $selectedJob == '000A1' ? 'selected' :''?>>
             Frontend web developers</option>
-            <option value="000A2"<?= $selectedJob == '000A2' ? 'selected' :''?>>
+            <option value="000A2" <?= $selectedJob == '000A2' ? 'selected' :''?>>
                 Backend web developers</option>
-            <option value="000A3"<?= $selectedJob == '000A3' ? 'selected' :''?>>
+            <option value="000A3" <?= $selectedJob == '000A3' ? 'selected' :''?>>
                 UI/UX Developers & Designers</option>
-            <option value="000A4"<?= $selectedJob == '000A4' ? 'selected' :''?>>
+            <option value="000A4" <?= $selectedJob == '000A4' ? 'selected' :''?>>
                 Graphic designers</option>
-            <option value="000A5"<?= $selectedJob == '000A5' ? 'selected' :''?>>
+            <option value="000A5" <?= $selectedJob == '000A5' ? 'selected' :''?>>
                 Technical support (Call centre worker)</option>
         </select>
     </div>
