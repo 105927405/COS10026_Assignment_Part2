@@ -1,5 +1,13 @@
 <?php 
     $selectedJob = $_GET['job'] ?? '';
+
+    reqire_once 'setting.php';
+    
+    $conn = new msqli($host, $user, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +68,48 @@
     <div>
         <label for="job">Job</label>
         <select name="job" id="job" required>
+            
+        <option value="" disabled <?= empty($selectedJob) ? 'selected' :''?>>
+            Please select a position</option>
+            
+        <?php
+        $sql = "SELECT REF_NUM, Job_Name FROM Jobs";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0){
+            while ($row = $result->fetch_assoc())
+                {
+                    $selected = (selectedJobs ==$row['REF_NUM'])
+                        ? 'selected'
+                        : '';
+                    ?>
+
+                    <option
+                        value="<?= htmlspecialchars($row['REF_NUM']) ?>"
+                        <?= $selected ?>>
+                        <?= htmlspecialchars($row['Job_Name']) ?>
+                    </option>
+                    <?php
+                }
+        }
+        else
+        {
+            ?>
+            <option value="" disabled>
+                No jobs available
+            </option>
+            <?php
+        }
+        ?>    
+        </select>
+    </div>
+</fieldset>
+
+<!-- 
+<fieldset>
+    <div>
+        <label for="job">Job</label>
+        <select name="job" id="job" required>
             <option value="" disabled <?= empty($selectedJob) ? 'selected' :''?>>
             Please select a position</option>
             <option value="000A1" <?= $selectedJob == '000A1' ? 'selected' :''?>>
@@ -75,7 +125,7 @@
         </select>
     </div>
 </fieldset>
-
+-->
 <!--Work Availabibity-->
 
 
@@ -196,9 +246,29 @@
             <input type="checkbox" id="BPS" name="BPS"/>
         </label>
 
+        <label for="APS">
+            Advanced Programming Skills
+            <input type="checkbox" id="APS" name="APS" required/>
+        </label>
+
+        <label for="BDS">
+            Basic Design Skills
+            <input type="checkbox" id="BDS" name="BDS" required/>
+        </label>
+
+        <label for="ADS">
+            Advanced Design Skills
+            <input type="checkbox" id="ADS" name="ADS" required/>
+        </label>
+
         <label for="BTS">
             Basic Technical Skills
             <input type="checkbox" id="BTS" name="BTS"/>
+        </label>
+
+        <label for="ATS">
+            Advanced Technical Skills
+            <input type="checkbox" id="ATS" name="ATS"/>
         </label>
 
         <label for="Js">
