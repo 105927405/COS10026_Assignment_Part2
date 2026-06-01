@@ -23,6 +23,8 @@ function to_null_if_empty($value)
         $email = $_POST['Email'];
         $phone = $_POST['Phone_NUM'];
         $gender = $_POST['Gender'];
+//job selection
+        $job = $_POST['Job']
 //days applicant is available and the time they can work
         $monday = isset($_POST['monday']) ?1:0;
         $mondaystart = to_null_if_empty($_POST['monday-start']);
@@ -80,7 +82,18 @@ function to_null_if_empty($value)
         $coverletter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
         $resume = file_get_contents($_FILES['Resume']['tmp_name']);
 
-
+        $stmt = $conn->prepare("INSERT INTO EOI) (F_name, L_name, DOB, Email, Phone_NUM, Gender,
+        Job, monday, montimein, montimeout, tuesday, tuetimein, 
+        tuetimeout, wednesday, wedtimein, wedtimeout, thursday, 
+        thurtimein, thurtimeout, friday, fritimein, fritimeout, 
+        saturday, sattimein, sattimeout, sunday, suntimein, suntimeout,
+        Address, Suburb, State, Post_Code, communication, teamwork, time,
+        cs, BPS, APS, BDS, ADS, BTS, ATS, JS, Extra_Skills, Cover_Letter,
+        Write_Letter, Resume)
+        VALUES
+        (
+        ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        );        
 
 
     }
