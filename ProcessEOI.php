@@ -23,6 +23,22 @@ function to_null_if_empty($value)
         $Email = $_POST['Email'];
         $Phone_NUM = $_POST['Phone_NUM'];
         $Gender = $_POST['Gender'];
+
+// first name valadation
+        if (!preg_match('/^[A-Za-Z]=$/', $F_name))
+            {
+                $errors[] = "First Name must only contain letters"
+            }
+// last name valadation
+         if (!preg_match('/^[A-Za-Z]=$/', $L_name))
+            {
+                $errors[] = "Last Name must only contain letters"
+            }
+// phone number valadation
+         if (!preg_match('/^[0-9]{10}=$/', $Phone_NUM))
+            {
+                $errors[] = "Phone number must only have 10 numbers"
+            }
 //job selection
         $Job = $_POST['Job'];
 //days applicant is available and the time they can work
@@ -52,6 +68,11 @@ function to_null_if_empty($value)
         $Suburb = $_POST['Suburb'];
         $State = $_POST['State'];
         $Post_Code = $_POST['Post_Code'];
+ // phone number valadation
+         if (!preg_match('/^[0-9]{4}=$/', $Post_Code))
+            {
+                $errors[] = "Post Code must only have 4 numbers"
+            }
 //preselected skills the applicants can pick from
         $communication = isset($_POST['communication']) ?1:0;
         $teamwork = isset($_POST['teamwork']) ?1:0;
