@@ -1,9 +1,9 @@
 <?php 
     $selectedJob = $_GET['job'] ?? '';
 
-    reqire_once 'setting.php';
+    require_once 'setting.php';
     
-    $conn = new msqli($host, $user, $password, $database);
+    $conn = new mysqli($host, $user, $password, $database);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -17,7 +17,7 @@
 <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php">
 
 <!--personal infomation-->
-
+<body>
 <fieldset>
     <div><label for="first_name">First Name</label>
         <input type="text" name="first_name" pattern="[A-Za-z]+" id="first_name" maxlength="20" size="10" placeholder="First Name" required/>
@@ -79,7 +79,7 @@
         if ($result && $result->num_rows > 0){
             while ($row = $result->fetch_assoc())
                 {
-                    $selected = (selectedJobs ==$row['REF_NUM'])
+                    $selected = ($selectedJobs ==$row['REF_NUM'])
                         ? 'selected'
                         : '';
                     ?>
@@ -136,51 +136,51 @@
 
     <label for="monday">Monday</label>
     <input type="checkbox" id="monday" name="monday"/>
-    <input type="time" id="monday-start"/>
+    <input type="time" id="monday-start" name="monday-start"/>
     <label for="monday" class="till"> till </label>
-    <input type="time" id="monday-end"/>
+    <input type="time" id="monday-end" name="monday-end"/>
     <br>
 
     <label for="tuesday">Tuesday</label>
     <input type="checkbox" id="tuesday" name="tuesday"/>
-    <input type="time" id="tuesday-start"/>
+    <input type="time" id="tuesday-start" name="tuesday-start"/>
     <label for="tuesday" class="till"> till </label>
-    <input type="time" id="tuesday-end"/>
+    <input type="time" id="tuesday-end" name="tuesday-end"/>
     <br>
 
     <label for="wednesday">Wednesday</label>
     <input type="checkbox" id="wednesday" name="wednesday"/>
-    <input type="time" id="wednesday-start"/>
+    <input type="time" id="wednesday-start" name="wednesday-start"/>
     <label for="wednesday" class="till"> till </label>
-    <input type="time" id="wednesday-end"/>
+    <input type="time" id="wednesday-end" name="wednesday-end"/>
     <br>
 
     <label for="thursday">Thursday</label>
     <input type="checkbox" id="thursday" name="thursday"/>
-    <input type="time" id="thursday-start"/>
+    <input type="time" id="thursday-start" name="thursday-start"/>
     <label for="thursday" class="till"> till </label>
-    <input type="time" id="thursday-end"/>
+    <input type="time" id="thursday-end" name="thursday-end"/>
     <br>
 
     <label for="friday">Friday</label>
     <input type="checkbox" id="friday" name="friday"/>
-    <input type="time" id="friday-start"/>
+    <input type="time" id="friday-start" name="friday-start"/>
     <label for="friday" class="till"> till </label>
-    <input type="time" id="friday-end"/>
+    <input type="time" id="friday-end" name="friday-end"/>
     <br>
 
     <label for="saturday">Saturday</label>
     <input type="checkbox" id="saturday" name="saturday"/>
-    <input type="time" id="saturday-start"/>
+    <input type="time" id="saturday-start" name="saturday-start"/>
     <label for="saturday" class="till"> till </label>
-    <input type="time" id="saturday-end"/>
+    <input type="time" id="saturday-end" name="saturday-end"/>
     <br>
 
     <label for="sunday">Sunday</label>
     <input type="checkbox" id="sunday" name="sunday"/>
-    <input type="time" id="sunday-start"/>
+    <input type="time" id="sunday-start" name="sunday-start"/>
     <label for="sunday" class="till"> till </label>
-    <input type="time" id="sunday-end"/>
+    <input type="time" id="sunday-end" name="sunday-end"/>
     
 </fieldset>
 
