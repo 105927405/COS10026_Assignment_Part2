@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <title>Blade EduNET - Jobs</title>
+    <link rel="stylesheet" href="Styles/Style.css">
+</head>
+
 <body>
+
 <?php include 'header.inc'; ?>
 
 <div class="JobContainer">
@@ -16,10 +23,10 @@
 
         <hr class="hrSpecial">
 
-        <!-- SEARCH BOX -->
-        <form method="GET" action="">
+        <!-- SEARCH BOX (FIXED: no action attribute) -->
+        <form method="GET">
             <input type="text" name="search" placeholder="Search..."
-                value="<?php if (isset($_GET['search'])) echo htmlspecialchars($_GET['search']); ?>">
+                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
             <button type="submit">Search</button>
         </form>
 
@@ -31,33 +38,44 @@
 require_once 'settings.php';
 
 $conn = new mysqli($host, $user, $password, $database);
-    if ($conn->connect_error) {
-        die("Database connection failed: " . $conn->connect_error);
-    }
 
-$search = "";
-
-if (isset($_GET['search']) && !empty($_GET['search'])) {
-
-    $search = $_GET['search'];
-
-    $sql = "
-        SELECT * FROM Jobs
-        WHERE
-            REF_NUM LIKE '%$search%' OR
-            Job_Name LIKE '%$search%' OR
-            Pay LIKE '%$search%' OR
-            E_Skills LIKE '%$search%' OR
-            P_Skills LIKE '%$search%' OR
-            Description LIKE '%$search%'
-    ";
-
-} else {
-    $sql = "SELECT * FROM Jobs";
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
 }
 
-$result = $conn->query($sql);
+/* SAFE SEARCH (FIXED: prevents SQL injection) */
+$search = isset($_GET['search'])
+    ? '%' . strtolower(trim($_GET['search'])) . '%'
+    : '%';
 
+$sql = "
+    SELECT *
+    FROM Jobs
+    WHERE
+        CAST(REF_NUM AS CHAR) LIKE ?
+        OR LOWER(Job_Name) LIKE ?
+        OR CAST(Pay AS CHAR) LIKE ?
+        OR LOWER(E_Skills) LIKE ?
+        OR LOWER(P_Skills) LIKE ?
+        OR LOWER(Description) LIKE ?
+";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bind_param(
+    "ssssss",
+    $search,
+    $search,
+    $search,
+    $search,
+    $search,
+    $search
+);
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+/* OUTPUT */
 if ($result && $result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
@@ -66,39 +84,39 @@ if ($result && $result->num_rows > 0) {
 <div class="JobContainer">
     <section>
 
-        <h3><?php echo $row['Job_Name']; ?></h3>
+        <h3><?php echo htmlspecialchars($row['Job_Name']); ?></h3>
 
         <aside>
             <ul>
                 <li>Pay
                     <ul>
-                        <li>Annual Salary: $<?php echo $row['Pay']; ?></li>
+                        <li>Annual Salary: $<?php echo htmlspecialchars($row['Pay']); ?></li>
                     </ul>
                 </li>
 
                 <li>Hours
                     <ul>
-                        <li><?php echo $row['Hours']; ?></li>
+                        <li><?php echo htmlspecialchars($row['Hours']); ?></li>
                     </ul>
                 </li>
             </ul>
 
-            <a href="EOI.php?ref=<?php echo $row['REF_NUM']; ?>">
+            <a href="EOI.php?ref=<?php echo urlencode($row['REF_NUM']); ?>">
                 Apply Now
             </a>
         </aside>
 
         <h4>About this position</h4>
-        <p><?php echo $row['Description']; ?></p>
+        <p><?php echo htmlspecialchars($row['Description']); ?></p>
 
         <h5>Essential Skills:</h5>
-        <p><?php echo $row['E_Skills']; ?></p>
+        <p><?php echo htmlspecialchars($row['E_Skills']); ?></p>
 
         <h5>Preferable Skills:</h5>
-        <p><?php echo $row['P_Skills']; ?></p>
+        <p><?php echo htmlspecialchars($row['P_Skills']); ?></p>
 
         <h5>Manager of Position:</h5>
-        <p><?php echo $row['Manager']; ?></p>
+        <p><?php echo htmlspecialchars($row['Manager']); ?></p>
 
     </section>
 </div>
@@ -109,9 +127,11 @@ if ($result && $result->num_rows > 0) {
     echo "<p>No Jobs Found</p>";
 }
 
+$stmt->close();
 $conn->close();
 ?>
 
 <?php include 'footer.inc'; ?>
+
 </body>
 </html>
