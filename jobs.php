@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Blade EduNET - Jobs</title>
@@ -101,7 +98,7 @@ if ($result && $result->num_rows > 0) {
                 </li>
             </ul>
 
-            <a href="EOI.php?ref=<?php echo urlencode($row['REF_NUM']); ?>">
+            <a href="EOI.php?job=<?php echo urlencode($row['REF_NUM']); ?>">
                 Apply Now
             </a>
         </aside>
