@@ -27,12 +27,12 @@ function to_null_if_empty($value)
         $errors = [];
 
 // first name valadation
-        if (!preg_match('/^[A-Za-Z]+$/', $F_name))
+        if (!preg_match('/^[A-Za-z]+$/', $F_name))
             {
                 $errors[] = "First Name must only contain letters";
             }
 // last name valadation
-         if (!preg_match('/^[A-Za-Z]+$/', $L_name))
+         if (!preg_match('/^[A-Za-z]+$/', $L_name))
             {
                 $errors[] = "Last Name must only contain letters";
             }
