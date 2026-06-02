@@ -32,10 +32,10 @@
 <body>
     <div class = "TextContainer">
     <?php if ($message): ?>
-        <div style = "color: green;"><?php echo $message; ?></div>
+        <div style = "margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #006600; border: 1px solid #00aa00; margin-bottom: 15px; border-radius: 5px;"><?php echo $message; ?></div>
     <?php endif; ?>
     <?php if ($error): ?>
-        <div style = "color: red;"><?php echo $error; ?></div>
+        <div style = "margin-top: 10px; padding: 10px; background-color: #ffe0e0; color: #990000; border: 1px solid #cc0000; margin-bottom: 15px; border-radius: 5px;"><?php echo $error; ?></div>
     <?php endif; ?>
     </div>
 <fieldset>
