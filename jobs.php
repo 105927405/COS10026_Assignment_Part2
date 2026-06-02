@@ -118,15 +118,21 @@ if ($result && $result->num_rows > 0) {
     </section>
 </div>
 
+<div class="JobContainer">
 <?php
     }
 } else {
-    echo "<p>No Jobs Found</p>";
+    echo '
+<div class="JobContainer">
+    <h3>No Jobs Found</h3>
+    <p>Try searching something else...</p>
+</div>';
 }
 
 $stmt->close();
 $conn->close();
 ?>
+</div>
 
 <?php include 'footer.inc'; ?>
 
