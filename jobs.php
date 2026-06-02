@@ -118,7 +118,6 @@ if ($result && $result->num_rows > 0) {
     </section>
 </div>
 
-<div class="JobContainer">
 <?php
     }
 } else {
@@ -132,7 +131,6 @@ if ($result && $result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
-</div>
 
 <?php include 'footer.inc'; ?>
 
