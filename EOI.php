@@ -30,15 +30,16 @@
 
 <!--personal infomation-->
 <body>
-    <div class = "TextContainer">
+
+    
+<fieldset>
     <?php if ($message): ?>
         <div style = "margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #006600; border: 1px solid #00aa00; margin-bottom: 15px; border-radius: 5px;"><?php echo $message; ?></div>
     <?php endif; ?>
     <?php if ($error): ?>
         <div style = "margin-top: 10px; padding: 10px; background-color: #ffe0e0; color: #990000; border: 1px solid #cc0000; margin-bottom: 15px; border-radius: 5px;"><?php echo $error; ?></div>
     <?php endif; ?>
-    </div>
-<fieldset>
+    
     <div><label for="F_name">First Name</label>
         <input type="text" name="F_name" pattern="[A-Za-z]+" id="F_name" maxlength="20" size="10" placeholder="First Name" required/>
 
