@@ -12,7 +12,14 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    $error = '';
+    $message = '';
+    if (isset($_GET['message'])){
+        $message = htmlspecialchars($_GET['message']);
+    }
+    if (isset($_GET['error'])){
+        $error = htmlspecialchars($_GET['error']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +30,14 @@
 
 <!--personal infomation-->
 <body>
+    <div class = "TextContainer">
+    <?php if ($message): ?>
+        <div style = "color: green;"><?php echo $message; ?></div>
+    <?php endif; ?>
+    <?php if ($error): ?>
+        <div style = "color: red;"><?php echo $error; ?></div>
+    <?php endif; ?>
+    </div>
 <fieldset>
     <div><label for="F_name">First Name</label>
         <input type="text" name="F_name" pattern="[A-Za-z]+" id="F_name" maxlength="20" size="10" placeholder="First Name" required/>

@@ -15,7 +15,11 @@ function to_null_if_empty($value)
 }
 
     //Pull data from form via $_POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
+            header('Location: EOI.php');
+            exit();
+        }
 //peronsal infomation 
         $F_name = $_POST['F_name'];
         $L_name = $_POST['L_name'];
@@ -144,23 +148,17 @@ function to_null_if_empty($value)
 
         // Execute and check success
         if ($stmt->execute()) {
-    echo "<script>
-            alert('Application submitted successfully!');
-            window.location.href='EOI.php';
-          </script>";
-    exit();
-    } 
+            header('Location: EOI.php?message=' . urlencode('Applcation Submitted Seccessfully.'));
+            exit();
+        } 
         else {
             echo "Error: " . $stmt->error;
+            header('Location: EOI.php?error=' . urlencode('An Error Occured.'));
+            exit();
         }
 
         $stmt->close();
         $conn->close();
 
 
-
-
-
-
-    }
     
