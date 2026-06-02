@@ -48,7 +48,7 @@
         <br>
 
         <label for="DOB">Date of Birth</label>
-        <input type="date" name="DOB" id="DOB" required/>
+        <input type="date" name="DOB" id="DOB" max="<?= date('y-m-d', strtotime('-18 years')) ?>" required/>
     </div>
 </fieldset>
 

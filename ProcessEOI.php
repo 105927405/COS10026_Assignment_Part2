@@ -45,6 +45,15 @@ function to_null_if_empty($value)
             {
                 $errors[] = "Phone number must only have 10 numbers";
             }
+//DOB validation 
+$birthDate = new DateTime($DOB);
+$today = new DateTime();
+$age = $today->diff($birthDate)->y;
+if ($age < 18)
+    {
+        $errors[] = "Applicants must be 18 or older to apply";
+    }
+    
 //job selection
         $Job = $_POST['Job'];
 //days applicant is available and the time they can work
@@ -94,6 +103,13 @@ function to_null_if_empty($value)
         $Extra_Skills = $_POST['Extra_Skills'];
         $Write_Letter = $_POST['Write_Letter'];
 
+if (!empty($errors))
+{
+    header('Location: EOI.php?error=' . urlencode(implode(', ', $errors)));
+    exit();
+}
+
+/* 
         if (!empty($errors))
             {
                 foreach ($errors as $error)
@@ -102,7 +118,8 @@ function to_null_if_empty($value)
                     }
                     exit();
             }
-        
+*/
+
 //file upload for both the coverletter and the resume
         if (!isset($_FILES['Cover_Letter']) || $_FILES['Cover_Letter']['error'] !==0)
         {
