@@ -46,14 +46,19 @@ function to_null_if_empty($value)
                 $errors[] = "Phone number must only have 10 numbers";
             }
 //DOB validation 
-$birthDate = new DateTime($DOB);
-$today = new DateTime();
-$age = $today->diff($birthDate)->y;
-if ($age < 18)
-    {
-        $errors[] = "Applicants must be 18 or older to apply";
-    }
-    
+    $birthDate = new DateTime($DOB);
+    $today = new DateTime();
+    $age = $today->diff($birthDate)->y;
+    if ($age < 18)
+        {
+            $errors[] = "Applicants must be 18 or older to apply";
+        }
+    if ($age > 122) 
+//We dont discrimate about age, this is the age of the oldest person to have lived:
+//Jeanne Louise Calment a woman from france who lived to 122 born Feb 21 1875, died Aug 4 1997.
+        {
+            $errors[] = "Applicants must be 122 or younger to apply"
+        }
 //job selection
         $Job = $_POST['Job'];
 //days applicant is available and the time they can work
@@ -93,7 +98,7 @@ if ($age < 18)
         $teamwork = isset($_POST['teamwork']) ?1:0;
         $time = isset($_POST['time']) ?1:0;
         $cs = isset($_POST['cs']) ?1:0;
-        $BPS = isset($_POST['BTS']) ?1:0;
+        $BPS = isset($_POST['BPS']) ?1:0;
         $APS = isset($_POST['APS']) ?1:0;
         $BDS = isset($_POST['BDS']) ?1:0;
         $ADS = isset($_POST['ADS']) ?1:0;
@@ -138,13 +143,6 @@ if (!empty($errors))
     exit();
 }
 
-
-if (!empty($errors))
-{
-    header('Location: EOI.php?error=' . urlencode(implode(', ', $errors)));
-    exit();
-}
-
 /* 
         if (!empty($errors))
             {
@@ -172,7 +170,7 @@ if (!empty($errors))
         }
 
 
-        $Cover_Letter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
+        $Cover_Letter = $coverletter;
         $Resume = file_get_contents($_FILES['Resume']['tmp_name']);
 
         $stmt = $conn->prepare("INSERT INTO EOI (F_name, L_name, DOB, Email, Phone_NUM, Gender,
