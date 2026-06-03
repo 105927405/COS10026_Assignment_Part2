@@ -20,7 +20,6 @@
 
         <hr class="hrSpecial">
 
-        <!-- SEARCH BOX (FIXED: no action attribute) -->
         <form method="GET">
             <input type="text" name="search" placeholder="Search..."
                 value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
@@ -40,7 +39,7 @@ if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
-/* SAFE SEARCH (FIXED: prevents SQL injection) */
+
 $search = isset($_GET['search'])
     ? '%' . strtolower(trim($_GET['search'])) . '%'
     : '%';
@@ -72,7 +71,6 @@ $stmt->bind_param(
 $stmt->execute();
 $result = $stmt->get_result();
 
-/* OUTPUT */
 if ($result && $result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
