@@ -314,12 +314,13 @@ if (!$JOBresults) {
     </form>
 
     
-</form>
+
 <hr class = "hrSpecial">
 <h3> Users (User Table) </h3>
 <form method = "GET" action= "">
     <input type = "text" name = "searchUSER" placeholder = "Search USER Database" value = "<?= htmlspecialchars($searchUSER) ?>">   <!--htmlspecialchars uses as a security feature-->
     <button type = "submit" value = "Search">Search</button>
+</form>
 <table>
     <tr>
         <th> User ID </th>
