@@ -57,7 +57,7 @@ function to_null_if_empty($value)
 //We dont discrimate about age, this is the age of the oldest person to have lived:
 //Jeanne Louise Calment a woman from france who lived to 122 born Feb 21 1875, died Aug 4 1997.
         {
-            $errors[] = "Applicants must be 122 or younger to apply"
+            $errors[] = "Applicants must be 122 or younger to apply";
         }
 //job selection
         $Job = $_POST['Job'];
