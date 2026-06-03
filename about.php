@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="description" content="Blade EduNET Company Website">
-<meta name="keywords" content="job application, education, work, development">
-<meta name="author" content="Blake, Marcus, Aaron">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blade EduNET - About Us</title>
-<link href="Styles/Style.css" rel="stylesheet">
-</head>
+
+<?php include 'header.inc'; ?> 
+
  
 <body>
- 
-<?php include 'header.inc'; ?>
- 
-<main class="page-wrapper">
- 
-<section class="card about-hero">
-<div class="about-text">
+
+
+<div class="AboutContainer">
 <h2>About Blade EduNET</h2>
  
 <p>
@@ -30,21 +20,21 @@
   for students from different backgrounds.
 </p>
  
-<p class="motto">
+<p>
   “No education is the restriction of the mind”
 </p>
-</div>
+
  
 <figure class="groupImage">
 <img src="Styles/Images/groupphoto.jpg" alt="Blade EduNET team members">
 <figcaption>Blade EduNET Team Members</figcaption>
 </figure>
-</section>
+
  
-<section class="card">
+
 <h3>About the Group</h3>
  
-<div class="people-grid">
+
 <?php
     require_once 'settings.php';
  
@@ -59,7 +49,7 @@
     if ($result && $result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
 ?>
-<article class="Person">
+<article>
 <h4><?php echo htmlspecialchars($row['Name']); ?></h4>
 <p><?php echo htmlspecialchars($row['Contributions']); ?></p>
 </article>
@@ -71,13 +61,12 @@
  
     $conn->close();
 ?>
-</div>
-</section>
+
  
-<section class="card">
+
 <h3>Fun Facts About Us</h3>
  
-<div class="table-wrapper">
+
 <table>
 <tr>
 <th>Name</th>
@@ -119,11 +108,10 @@
 <td>Built a server farm at 15</td>
 </tr>
 </table>
-</div>
-</section>
+
+
  
-<section class="card two-column">
-<div>
+
 <h3>Classes</h3>
  
 <dl>
@@ -143,13 +131,13 @@
 <dd>TNE30009</dd>
 <dd>Peter Branch</dd>
 </dl>
-</div>
+
  
-<div>
+
 <h3>Time Table</h3>
  
-<div class="table-wrapper">
-<table class="timetable">
+
+<table>
 <tr>
 <th>Time</th>
 <th>Monday</th>
@@ -204,13 +192,9 @@
 <td>COS10026</td>
 </tr>
 </table>
+
 </div>
-</div>
-</section>
- 
-</main>
- 
-<?php include 'footer.inc'; ?>
  
 </body>
+<?php include 'footer.inc'; ?>
 </html>
