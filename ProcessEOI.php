@@ -121,10 +121,14 @@ if (!empty($errors))
 */
 
 //file upload for both the coverletter and the resume
-        if (!isset($_FILES['Cover_Letter']) || $_FILES['Cover_Letter']['error'] !==0)
-        {
-            die("Error uploading your coverletter!");
-        }
+        $coverletter = null;
+
+    if (
+        isset($_FILES['Cover_Letter']) &&
+        $_FILES['Cover_Letter']['error'] === 0)
+            {
+                $coverletter = file_get_contents($_FILES['Cover_Letter']['tmp_name']);
+            }
 
          if (!isset($_FILES['Resume']) || $_FILES['Resume']['error'] !==0)
         {
@@ -153,7 +157,7 @@ if (!empty($errors))
         }
 
         //bind parameters
-        $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiisbsb",
+        $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiissss",
         $F_name, $L_name, $DOB, $Email, $Phone_NUM, $Gender, $Job, 
         $monday, $montimein, $montimeout, $tuesday, $tuetimein, $tuetimeout, 
         $wednesday, $wedtimein, $wedtimeout, $thursday, $thurtimein, $thurtimeout, 
