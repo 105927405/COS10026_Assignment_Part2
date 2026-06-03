@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once 'settings.php';
 
-        // Connect to MySQL
+// Connect to MySQL
         $conn = new mysqli($host, $user, $password, $database);
         if ($conn->connect_error) {
             die("Database connection failed: " . $conn->connect_error);
@@ -14,7 +14,7 @@ function to_null_if_empty($value)
     return trim($value)===''?null:$value;
 }
 
-    //Pull data from form via $_POST
+//Pull data from form via $_POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST')
         {
             header('Location: EOI.php');
@@ -83,7 +83,7 @@ if ($age < 18)
         $Suburb = $_POST['Suburb'];
         $State = $_POST['State'];
         $Post_Code = $_POST['Post_Code'];
- // phone number valadation
+//phone number valadation
          if (!preg_match('/^[0-9]{4}$/', $Post_Code))
             {
                 $errors[] = "Post Code must only have 4 numbers";
@@ -102,6 +102,42 @@ if ($age < 18)
         $JS = isset($_POST['Js']) ?1:0;
         $Extra_Skills = $_POST['Extra_Skills'];
         $Write_Letter = $_POST['Write_Letter'];
+
+
+//Cover Letter validation (optional)
+    if (
+        isset($_FILES['Cover_Letter']) &&
+        $_FILES['Cover_Letter']['error'] === UPLOAD_ERR_OK)
+    {
+        $coverExtension = strtolower(
+            pathinfo($_FILES['Cover_Letter']['name'], PATHINFO_EXTENSION));
+
+    if ($coverExtension !== 'pdf')
+        {
+            $errors[] = "Cover Letter must be a PDF file.";
+        }
+    }
+
+//Resume validation (required)
+    if (
+        isset($_FILES['Resume']) &&
+        $_FILES['Resume']['error'] === UPLOAD_ERR_OK)
+    {
+        $resumeExtension = strtolower(
+            pathinfo($_FILES['Resume']['name'], PATHINFO_EXTENSION));
+
+        if ($resumeExtension !== 'pdf')
+            {
+                $errors[] = "Resume must be a PDF file.";
+            }
+    }
+
+if (!empty($errors))
+{
+    header('Location: EOI.php?error=' . urlencode(implode(', ', $errors)));
+    exit();
+}
+
 
 if (!empty($errors))
 {
@@ -156,7 +192,7 @@ if (!empty($errors))
             die("Prepare failed: " . $conn->error);
         }
 
-        //bind parameters
+//bind parameters
         $stmt->bind_param("sssssssissississississississssssiiiiiiiiiiissss",
         $F_name, $L_name, $DOB, $Email, $Phone_NUM, $Gender, $Job, 
         $monday, $montimein, $montimeout, $tuesday, $tuetimein, $tuetimeout, 
@@ -167,7 +203,7 @@ if (!empty($errors))
         $Extra_Skills, $Cover_Letter, $Write_Letter, $Resume
         );
 
-        // Execute and check success
+// Execute and check success
         if ($stmt->execute()) {
             header('Location: EOI.php?message=' . urlencode('Applcation Submitted Seccessfully.'));
             exit();

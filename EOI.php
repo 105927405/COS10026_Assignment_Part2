@@ -71,14 +71,15 @@
     <p>
         <label for="Gender">Gender</label>
         <br>
-        <input type="radio" name="Gender" id="male" value="male" required/>
         <label for="male">Male</label>
+        <input type="radio" name="Gender" id="male" value="male" required/>
         
-        <input type="radio" name="Gender" id="female" value="female"/>
         <label for="female">Female</label>
+        <input type="radio" name="Gender" id="female" value="female"/>
         
-        <input type="radio" name="Gender" id="other" value="other"/>
         <label for="other">Other</label>
+        <input type="radio" name="Gender" id="other" value="other"/>
+        
          
     </p>
 </fieldset>
@@ -152,6 +153,7 @@
 -->
 
 <!--Work Availabibity-->
+<div class="AvailabilityContainer">
 <fieldset>
     <p>
         Please select days you are available and what times would work best.
@@ -206,6 +208,7 @@
     <input type="time" id="suntimeout" name="suntimeout"/>
     
 </fieldset>
+</div>
 
 
 <!-- infomation on applicants home address-->
@@ -306,7 +309,7 @@
 <fieldset>
     <label for="Extra_Skills">Extra Skills</label>
         <br>
-        <textarea required id="Extra_Skills" name="Extra_Skills" rows="7" cols="40" placeholder="Write any other skills you have..."></textarea>
+        <textarea id="Extra_Skills" name="Extra_Skills" rows="7" cols="40" placeholder="Write any other skills you have..."></textarea>
 </fieldset>
 
 <fieldset>
@@ -314,8 +317,10 @@
         <label for="Cover_Letter">Upload Cover Letter</label>
         <label class="UploadButton">
             Choose File
-        <input type="file" name="Cover_Letter" id="Cover_Letter"/>
+        <input type="file" name="Cover_Letter" id="Cover_Letter" accept=".pdf,application/pdf"/>
         </label>
+        <br>
+        <small>Optional. PDF format only </small>
     </p>
     
     <p>
@@ -330,14 +335,17 @@
         <label for="Resume">Upload Resume</label>
         <label class="UploadButton">
             Choose File
-            <input type="file" name="Resume" id="Resume" required/>
+            <input type="file" name="Resume" id="Resume" accept=".pdf,application/pdf" required/>
         </label>
+        <br>
+        <small>Required. PDF format only </small>
     </p>
 </fieldset>
 
-
+<div class = "TextContainer">
 <button type="submit" name="submit">Apply Now</button>
 <button type="reset" name="reset">Reset form</button>
+</div>
 </form>
 
 
