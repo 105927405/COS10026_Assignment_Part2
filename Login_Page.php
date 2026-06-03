@@ -83,13 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     <?php include 'header.inc'; ?>
 
-    <div class = "TextContainer">
+    <div class = "CreateUserContainer">
     <h2>Login</h2>
     <?php if ($message): ?>
-        <div style = "color: green;"><?php echo $message; ?></div> <!inline css to make messages green>
+        <div style = "margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #006600; border: 1px solid #00aa00; margin-bottom: 15px; border-radius: 5px;"><?php echo $message; ?></div> <!inline css to make messages green>
     <?php endif; ?>
     <?php if ($error): ?>
-        <div style = "color: red;"><?php echo $error; ?></div> <!inline css to make error messages red>
+        <div style = "margin-top: 10px; padding: 10px; background-color: #ffe0e0; color: #990000; border: 1px solid #cc0000; margin-bottom: 15px; border-radius: 5px;"><?php echo $error; ?></div> <!inline css to make error messages red>
     <?php endif; ?>
     <form method = "post" action = ""> <!post empty as php is managed within the code>
         <label for = "username">Username:</label>

@@ -41,7 +41,7 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="soon.html">More Info</a>
+                <a href="soon.php">More Info</a>
             </aside>
             <h4> About this product </h4>
             <p> Blade EduMATH is a web-based platform designed to support mathematics learning through online tests, quizzes, and interactive activities.
@@ -76,7 +76,7 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="soon.html">More Info</a>
+                <a href="soon.php">More Info</a>
             </aside>
             <h4> About this product </h4>
             <p> Blade EduLIT is a web-based learning tool focused on literature education, offering quizzes, assessments, and reading-based activities.
@@ -111,7 +111,7 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="soon.html">More Info</a>
+                <a href="soon.php">More Info</a>
             </aside>
             <h4> About this product </h4>
             <p> Blade EduADMIN is a web-based school administration system that streamlines tasks such as student records, scheduling, and communication.

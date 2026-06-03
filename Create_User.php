@@ -84,10 +84,10 @@
 <html lang = "en">
     <?php include 'header.inc'; ?>
 
-    <div class = "TextContainer">
+    <div class = "CreateUserContainer">
     <h2>Create User</h2>
     <?php if ($error): ?>
-        <div style = "color: red;"><?php echo $error; ?></div>
+        <div style = "margin-top: 10px; padding: 10px; background-color: #ffe0e0; color: #990000; border: 1px solid #cc0000; margin-bottom: 15px; border-radius: 5px;"><?php echo $error; ?></div>
     <?php endif; ?>
     <form method = "post" action = "">
         <label for = "username">Username:</label>
