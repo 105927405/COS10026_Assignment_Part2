@@ -112,10 +112,6 @@ if (isset($_GET['ROLEtoggle']) && is_numeric($_GET['ROLEtoggle'])){
 
 }
 
-if (isset($_GET['EOIview']) && is_numeric($_GET['EOIview'])){
-    $toggle_id = intval($_GET['EOIview']);
-
-}
 
 
 
@@ -166,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang = "en">
 <?php include 'header.inc'; ?>
 <body>
-<div class = "TextContainer">
+<div class = "ManageContainer">
 
     
     <h2>Welcome to the HR Manager Dashboard, <?= $_SESSION['firstname'] ?> <?= $_SESSION['lastname'] ?></h2> 
@@ -174,12 +170,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
  <?php
 if (isset($_GET['message'])) {
-    echo '<div style="color: green; font-weight: bold;">' . $_GET['message'] . '</div>';
+    echo '<div style = "margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #006600; border: 1px solid #00aa00; margin-bottom: 15px; border-radius: 5px;">' . $_GET['message'] . '</div>';
 }
 ?>
 
 
-    
 </form>
 <hr class = "hrSpecial">
 <h3> Applicants (EOI Table) </h3>
@@ -191,7 +186,6 @@ if (isset($_GET['message'])) {
         <th> EOI ID </th>
         <th> First Name </th>
         <th> Last Name </th>
-        <th> DOB </th>
         <th> Email </th>
         <th> Phone </th>
         <th> Job </th>
@@ -235,12 +229,12 @@ if (!$EOIresults) {
                 <td><a href='download.php?id=" .urlencode($row['EOI_id']) . "&type=res'>Download</a></td>
                 <td>" . $row['Status'] . "</td>
                 <td><a href='?EOItoggle=" . $row['EOI_id'] . "' onclick=\"return confirm('Change status of applicant ID {$row['EOI_id']}?');\">Toggle</a></td>
-                <td><a href='?EOIview=" . $row['EOI_id'] . "' onclick=\"return confirm('View all application data?');\">View</a></td>
+                <td><a href='view_eoi.php?id=" . $row['EOI_id'] . "' target='_blank'>View</a></td>
                 <td><a href='?EOIdelete=" . $row['EOI_id'] . "' onclick=\"return confirm('Are you sure you want to delete applicant ID {$row['EOI_id']}?');\">Delete</a></td>
                 </tr>"; 
     }
 } else {
-    echo "<tr><td colspan='12'> No results found.</td></tr>";
+    echo "<tr><td colspan='13'> No results found.</td></tr>";
 }
 ?>
 </table>
@@ -300,7 +294,7 @@ if (!$JOBresults) {
                 </tr>"; 
     }
 } else {
-    echo "<tr><td colspan='12'> No results found.</td></tr>";
+    echo "<tr><td colspan='9'> No results found.</td></tr>";
 }
 ?>
 </table>
@@ -366,7 +360,7 @@ if (!$USERresults) {
                 </tr>"; 
     }
 } else {
-    echo "<tr><td colspan='12'> No results found.</td></tr>";
+    echo "<tr><td colspan='7'> No results found.</td></tr>";
 }
 mysqli_close($conn);
 ?>

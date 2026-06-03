@@ -55,9 +55,9 @@ h5 {
 /* header css for h1, images (logo) and nav bar, as well as nav hover */
 header {
 
-    position: sticky; 
-    margin: auto;  /* space around sides auto for different screen sizes*/
-    top: 15px; /* push just header down from top of page only visual change not physical container moving so doesn't break other thingss*/
+    
+    margin: 20px auto 0 auto;  /* space around sides auto for different screen sizes*/
+    
     width: fit-content;  /* shrink to content size only*/
     max-width: 90%; /* set max width of header nav bar to keep effect */
     display: flex;
@@ -118,8 +118,7 @@ nav a:hover {
 /* footer settings */
 footer {
 
-    position: relative; /* keeps footer to bottom of page */
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
     text-align: center;
     background-color: #171080;
@@ -189,7 +188,7 @@ body {
 
 .BackgroundContainer {
 
-    background-image: url("Styles/Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
+    background-image: url("Images/Background.jpg");  /*background photo for top of page, fix sizing in next assignment submission, every page is different*/
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -307,8 +306,7 @@ table {
     font-size: 1em;
     text-align: center;
     background-color: #f9f9f9;
-    display: block;
-    overflow-x: auto;
+    display: table;
     
 }
 
@@ -584,5 +582,218 @@ button:hover {
         flex-direction: column;
         gap: 15px;
     }
+
+}
+
+/*Added by Aaron */
+
+.groupImage {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.groupImage img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.groupImage figcaption {
+    font-size: 14px;
+    color: #555;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/*end added by aaron */
+
+tr:hover {
+
+    background-color: cyan;
+
+}
+
+.ManageContainer {
+
+    margin: 60px auto 60px auto;
+    width: 90%;
+    max-width: 1300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+table a {
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+table a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+.CreateUserContainer {
+
+    margin: 60px auto 60px auto;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+.CreateUserContainer input, textarea {
+
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    margin: 10px 0 20px;
+    border: 0.5px solid #171080;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+.CreateUserContainer a {
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin-top: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.CreateUserContainer a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+.ManageContainer a {
+
+    display: inline-block;
+    background-color: #363535;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin-top: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.ManageContainer a:hover {
+
+    background-color: cyan;
+    color: #1e1e1e;
+
+}
+
+.ManageContainer input, textarea {
+
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    margin: 10px 0 20px;
+    border: 0.5px solid #171080;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+.AboutContainer {
+
+    margin: 60px auto 60px auto;
+    width: 90%;
+    max-width: 1400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #171080;
+
+}
+
+.JobContainer input, textarea {
+
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    margin: 10px 0 20px;
+    border: 0.5px solid #171080;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+/* custom css container for job application time slot availability */
+.AvailabilityContainer input {
+    
+    width: 20%;
+
+}
+
+/* custom checkboxes for time slot stuffs */
+.AvailabilityContainer input[type = "checkbox"] {
+
+    accent-color: #171080;
+    width: 18px;
+    height: 18px;
+    margin-right: 60px;
+    margin-left: 40px;
+
+}
+
+.AvailabilityContainer label {
+
+    display: inline-block;
+    margin: 2px;
+    width: 100px;
+
+}
+
+/* this stupid thing in order to move the till label acoss to the middle */
+.AvailabilityContainer .till {
+
+    margin-left: 80px;
+
+}
+
+/* custom radio buttons for gender */
+fieldset input[type = "radio"] {
+
+    accent-color: #171080;
+    width: 18px;
+    height: 18px;
+    margin-right: 60px;
+    margin-left: 40px;
+    
 
 }
